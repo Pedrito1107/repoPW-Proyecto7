@@ -34,7 +34,7 @@ export default function EquipmentDetailPage() {
 
   // Variantes del panel (mockup 3.2):
   //  · con deuda o cuenta bloqueada: no puede solicitar, se ofrece «Ver mi deuda»
-  //  · sin unidades libres: solicitar deshabilitado
+  //  · sin unidades libres: solicitar deshabilitado y acción «Reservar»
   const restriccion = restriccionDe(user?.id)
   const liberacion = libres === 0 ? proximaLiberacion(e.id) : null
   const puedeSolicitar = libres > 0 && !restriccion
@@ -163,10 +163,19 @@ export default function EquipmentDetailPage() {
 
           )}
 
-          {/* VER MI DEUDA */}
-          {restriccion && (
+          {/* CALENDARIO / RESERVAR / VER MI DEUDA */}
+          {restriccion ? (
             <Link to="/student/cuenta" className="btn btn-secondary btn-block">
               Ver mi deuda
+            </Link>
+          ) : (
+            <Link
+              to={'/student/calendario?equipo=' + e.id}
+              className={'btn btn-block ' + (libres > 0 ? 'btn-secondary' : 'btn-primary')}
+            >
+              {libres > 0
+                ? 'Ver calendario de ocupación'
+                : 'Reservar'}
             </Link>
           )}
 
@@ -193,6 +202,7 @@ export default function EquipmentDetailPage() {
               {liberacion
                 ? <> · la próxima se libera el <span className="mono">{dateOnly(liberacion)}</span>.</>
                 : <> · sin fecha estimada de liberación.</>}
+              {' '}Puedes reservarlo en el calendario.
             </div>
           )}
 

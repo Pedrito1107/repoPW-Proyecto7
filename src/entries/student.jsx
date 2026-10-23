@@ -23,6 +23,9 @@ import RequestFormPage from '../pages/catalog/RequestFormPage'
 import MyRequestsPage from '../pages/catalog/MyRequestsPage'
 // HU-4 · Constancia (consultable por el estudiante)
 import DeliveryReceiptPage from '../pages/loans/DeliveryReceiptPage'
+// HU-6 · Reserva anticipada
+import CalendarPage from '../pages/reservations/CalendarPage'
+import MyReservationsPage from '../pages/reservations/MyReservationsPage'
 
 
 function Shell() {
@@ -71,6 +74,11 @@ function App() {
           path="/student/prestamos/:codigo/constancia"
           element={<DeliveryReceiptPage volver="/student/solicitudes" volverLabel="Mis solicitudes" soloPropias />}
         />
+
+        {/* HU-6 · Reserva anticipada */}
+        <Route path="/student/calendario" element={<CalendarPage />} />
+        <Route path="/student/reservas" element={<MyReservationsPage />} />
+
 
         <Route
           path="*"

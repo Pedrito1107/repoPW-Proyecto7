@@ -2,17 +2,32 @@
 // HU-5 · 5.3 Modal de renovación (posible / bloqueada)
 // Primera entrega: solo se trabaja con datos del frontend.
 // Todavía no se guarda la renovación en base de datos.
-// (En la HU-6 también se bloquea si hay estudiantes en lista de espera.)
 
 import { Modal } from '../../components/ui.jsx'
 import { equipoDe } from '../../services/loansService.js'
+import { listarListaEspera } from '../../services/reservationsService.js'
+
+// Lista de espera del seed (HU-6): no se renueva si alguien espera el equipo
+const LISTA_ESPERA = listarListaEspera()
 
 export function RenewalModal({ prestamo, onClose }) {
 
   const equipo = equipoDe(prestamo.equipoId)
 
-  // La renovación solamente es posible si las condiciones del equipo la admiten.
-  const posible = Boolean(equipo?.condiciones.admiteRenovacion)
+  // Verifica si las condiciones del equipo permiten renovación.
+  const admite = equipo?.condiciones.admiteRenovacion
+
+  // Busca si este equipo tiene estudiantes en lista de espera.
+  const grupoEspera = LISTA_ESPERA.find(
+    (grupo) => grupo.equipoId === prestamo.equipoId
+  )
+
+  const enEspera = grupoEspera?.cola.length || 0
+
+  // NUEVO:
+  // La renovación solamente es posible si el equipo la admite
+  // y no hay estudiantes esperando por ese equipo.
+  const posible = admite && enEspera === 0
 
 
   return (
@@ -40,14 +55,29 @@ export function RenewalModal({ prestamo, onClose }) {
             </button>
           </>
         ) : (
-          // Cuando está bloqueada, Renovar queda deshabilitado.
-          <button
-            type="button"
-            className="btn btn-primary"
-            disabled
-          >
-            Renovar
-          </button>
+          <>
+            {/* NUEVO:
+                Cuando está bloqueada, Renovar queda deshabilitado. */}
+            <button
+              type="button"
+              className="btn btn-primary"
+              disabled
+            >
+              Renovar
+            </button>
+
+            {/* NUEVO:
+                Si existe lista de espera mostramos el botón
+                que aparece en el mockup. */}
+            {enEspera > 0 && (
+              <button
+                type="button"
+                className="btn btn-secondary"
+              >
+                Ver lista de espera
+              </button>
+            )}
+          </>
         )
       }
     >
@@ -101,13 +131,33 @@ export function RenewalModal({ prestamo, onClose }) {
 
           <div className="alert alert-success">
             Duración dentro del máximo permitido.
+            No hay solicitudes ni reservas en espera en el nuevo rango.
           </div>
         </>
       )}
 
 
-      {/* CASO 2: el equipo no permite renovar */}
-      {!posible && (
+      {/* CASO 2: existe lista de espera */}
+      {enEspera > 0 && (
+        <div className="alert alert-warning">
+
+          Hay <strong>{enEspera} solicitudes en espera</strong>
+          {' '}por este equipo.
+
+          {!admite && (
+            <>
+              {' '}
+              Además, sus condiciones no admiten renovación.
+            </>
+          )}
+
+        </div>
+      )}
+
+
+      {/* CASO 3:
+          No hay lista de espera, pero el equipo no permite renovar. */}
+      {!admite && enEspera === 0 && (
         <div className="alert alert-warning">
 
           <strong>Renovación no disponible.</strong>

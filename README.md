@@ -1,9 +1,9 @@
 # Tema 7 — Préstamo de equipos de laboratorio
 
-## Avance: etapa 5 · HU-1 a HU-5 — Entrega 1
+## Avance: etapa 6 · HU-1 a HU-6 — Entrega 1
 
-Esta etapa contiene las historias HU-1 a HU-5. La HU-6 (reserva anticipada)
-se agrega en la etapa 6 y la HU-7 (métricas y usuarios) en la versión final.
+Esta etapa contiene las historias HU-1 a HU-6. La HU-7 (métricas y usuarios)
+se agrega en la versión final.
 
 En esta entrega los datos viven en el front: `src/data/seed.json` se copia a
 `localStorage` la primera vez. Para volver a los datos iniciales, en la consola
@@ -37,7 +37,7 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | mdelgado@aloe.ulima.edu.pe | estudiante | Mariana Delgado Ríos |  |
 | bloqueado@aloe.ulima.edu.pe | estudiante | Alejandra Huamán Solís | Cuenta bloqueada con deuda S/ 60.00 |
 | floayza@aloe.ulima.edu.pe | estudiante | Fabiana Loayza Ramos |  |
-| rmendoza@aloe.ulima.edu.pe | estudiante | Renzo Andrés Mendoza Cárdenas | Sus solicitudes y préstamos aparecen en HU-3 a HU-5 |
+| rmendoza@aloe.ulima.edu.pe | estudiante | Renzo Andrés Mendoza Cárdenas | Sus solicitudes, préstamos y reservas aparecen en HU-3 a HU-6 |
 | gnunez@aloe.ulima.edu.pe | estudiante | Gabriel Núñez Herrera | Sin ningún préstamo |
 | lparedes@aloe.ulima.edu.pe | estudiante | Lucía Paredes Ynga |  |
 | estudiante@aloe.ulima.edu.pe | estudiante | Ana María Pérez Hernández |  |
@@ -66,13 +66,16 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | /manager/prestamos · /manager/vencidos · /manager/prestamos/:codigo/constancia | Préstamos vigentes y constancia (4.5–4.6) |
 | /student/prestamos/:codigo/constancia | Constancia vista por el estudiante (4.5) |
 | /manager/devoluciones/:codigo · /manager/usuarios/:id | Devolución e historial del estudiante (5.1–5.5) |
+| /student/calendario · /student/reservas · /manager/reservas · /manager/lista-espera | Reserva anticipada (6.1–6.4) |
+
+**HU-6 (reserva anticipada)** ya funciona de punta a punta con `services/reservationsService.js`: calendario por equipo con selección de rango, reserva con validación de solapamiento y lista de espera, «Mis reservas» con filtro y cancelación, asignación FIFO del encargado y conversión de la reserva en solicitud de préstamo (desde 3 días antes del inicio).
 
 **Todos los datos están en `src/data/seed.json`** (ya no hay `demoData.js`).
 Cada historia los lee con su servicio de `src/services/`: `catalogService` y
-`requestService` (HU-3), `loansService` (HU-4), `returnsService` y
-`usersService` (devoluciones e historial del estudiante, HU-5). Las vistas de
-HU-4 y HU-5 todavía solo muestran los datos: aprobar, entregar o devolver aún
-no los modifica.
+`requestService` (HU-3), `loansService` (HU-4), `returnsService` (HU-5),
+`reservationsService` (HU-6) y `usersService` (historial del estudiante, HU-5).
+Las vistas de HU-4 a HU-6 todavía solo muestran
+los datos: aprobar, entregar, devolver o reservar aún no los modifica.
 
 ### Capas del front
 
@@ -96,7 +99,7 @@ público), el servidor tiene **una carpeta por tipo de usuario**:
 |---|---|---|
 | `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/catalogo`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
 | `student/` | Solo rol estudiante (`soloStudent`) | `/student`, `/student/catalogo`, `/student/solicitudes`… |
-| `manager/` | Solo rol encargado (`soloManager`) | `/manager/inventario`, `/manager/solicitudes`, `/manager/devoluciones`… |
+| `manager/` | Solo rol encargado (`soloManager`) | `/manager/inventario`, `/manager/solicitudes`, `/manager/reservas`… |
 
 Cada ruta de las apps React está registrada **una por una** en el `routes.js`
 de su carpeta (sin comodines), agrupada por historia. Al agregar una página

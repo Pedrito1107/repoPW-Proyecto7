@@ -10,6 +10,7 @@ import { useAuth } from '../context/AuthContext.jsx'
 import { shortName, dateTime } from '../shared/format.js'
 import UserMenu from './UserMenu.jsx'
 import { listarBandeja, listarPrestamosVigentes } from '../services/loansService.js'
+import { listarReservasAlmacen, listarListaEspera } from '../services/reservationsService.js'
 
 // Datos del seed para los contadores del menú del encargado
 const BANDEJA = listarBandeja()
@@ -203,6 +204,14 @@ export function StudentLayout({ children }) {
                 Mis solicitudes
               </SmartLink>
 
+              <SmartLink href="/student/reservas">
+                Mis reservas
+              </SmartLink>
+
+              <SmartLink href="/student/calendario">
+                Calendario
+              </SmartLink>
+
             </nav>
 
           </div>
@@ -308,6 +317,21 @@ const SIDEBAR = [
     href: '/manager/devoluciones',
     label: 'Devoluciones',
     count: () => '–'
+  },
+
+  { group: 'COMPLEMENTARIOS' },
+
+  {
+    href: '/manager/reservas',
+    label: 'Reservas',
+    count: () => listarReservasAlmacen().length
+  },
+
+  {
+    href: '/manager/lista-espera',
+    label: 'Lista de espera',
+    count: () =>
+      listarListaEspera().reduce((n, g) => n + g.cola.length, 0)
   }
 
 ]

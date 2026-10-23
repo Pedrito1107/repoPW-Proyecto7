@@ -28,6 +28,9 @@ import ActiveLoansPage from '../pages/loans/ActiveLoansPage'
 // HU-5 · Devoluciones
 import ReturnPage from '../pages/returns/ReturnPage'
 import StudentHistoryPage from '../pages/returns/StudentHistoryPage'
+// HU-6 · Reserva anticipada
+import ManagerReservationsPage from '../pages/reservations/ManagerReservationsPage'
+import WaitlistPage from '../pages/reservations/WaitlistPage'
 
 
 function Shell() {
@@ -95,6 +98,10 @@ function App() {
         <Route path="/manager/devoluciones" element={<ReturnPage />} />
         <Route path="/manager/devoluciones/:codigo" element={<ReturnPage />} />
         <Route path="/manager/usuarios/:id" element={<StudentHistoryPage />} />
+
+        {/* HU-6 · Reserva anticipada */}
+        <Route path="/manager/reservas" element={<ManagerReservationsPage />} />
+        <Route path="/manager/lista-espera" element={<WaitlistPage />} />
 
         <Route
           path="*"

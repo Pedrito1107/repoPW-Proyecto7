@@ -9,10 +9,12 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Field, EmptyState } from '../../components/ui.jsx'
 import { money, plural } from '../../shared/format.js'
 import { buscarPrestamo, equipoDe, unidadesDe } from '../../services/loansService.js'
+import { listarReservasAlmacen } from '../../services/reservationsService.js'
 import { devolucionEnCurso } from '../../services/returnsService.js'
 
-// Devolución en curso del mockup 5.1 / 5.2 (seed)
+// Devolución en curso del mockup 5.1 / 5.2 y reservas del almacén (seed)
 const CASO_MOCKUP = devolucionEnCurso()
+const RESERVAS_ALMACEN = listarReservasAlmacen()
 
 export default function ReturnPage() {
   const { codigo = CASO_MOCKUP.codigo } = useParams()
@@ -95,6 +97,7 @@ function ReturnForm({ prestamo }) {
   const retraso = Math.max(0, -prestamo.dias)
   const penalidadDia = equipo.condiciones.penalidadDia
   const libres = unidadesDe(prestamo.equipoId).filter((u) => u.estado === 'disponible').length
+  const reserva = RESERVAS_ALMACEN.find((r) => r.equipo === equipo.nombre && r.estado === 'confirmada')
 
   function guardar(e) {
     e.preventDefault()
@@ -217,6 +220,7 @@ function ReturnForm({ prestamo }) {
             <strong>Efecto sobre el inventario.</strong> La unidad <span className="mono">{prestamo.unidad}</span> pasará
             a «En mantenimiento» en lugar de volver a «Disponible»; el equipo seguirá con{' '}
             {plural(libres, 'unidad libre', 'unidades libres')}.
+            {reserva && <> Hay 1 reserva del {reserva.rango} ({reserva.estudiante}) que deberá reasignarse.</>}
           </div>
 
           <div className="form-actions">

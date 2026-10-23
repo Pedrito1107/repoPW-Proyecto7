@@ -68,3 +68,12 @@ export const MAX_DESCRIPCION = 400
 // Fecha de corte de los datos de la Entrega 1 (el "hoy" de todas las vistas).
 // En la Entrega 2 será la fecha del servidor.
 export const FECHA_CORTE = '2026-09-14'
+
+// ---------- HU-6 · Reserva anticipada ----------
+
+// Desde cuántos días antes del inicio una reserva confirmada puede convertirse
+// en solicitud de préstamo («al aproximarse la fecha»)
+export const DIAS_PARA_CONVERTIR = 3
+
+// Estados de reserva que ocupan cupo o lugar en la cola
+export const RESERVAS_ACTIVAS = ['confirmada', 'en_espera']

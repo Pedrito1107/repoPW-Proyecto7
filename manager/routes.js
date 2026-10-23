@@ -35,7 +35,11 @@ router.get('/manager/devoluciones', soloManager, controller.home);
 router.get('/manager/devoluciones/:codigo', soloManager, controller.home);
 router.get('/manager/usuarios/:id', soloManager, controller.home);
 
+// HU-6 · Reserva anticipada (6.3 – 6.4)
+router.get('/manager/reservas', soloManager, controller.home);
+router.get('/manager/lista-espera', soloManager, controller.home);
+
 // Entrega 2: aquí se registran las APIs del encargado, también protegidas,
-// por ejemplo POST /api/v1/solicitudes/:codigo/entrega (HU-4) o POST /api/v1/devoluciones (HU-5).
+// por ejemplo GET /api/v1/reservas (HU-6) o POST /api/v1/devoluciones (HU-5).
 
 export default router;
