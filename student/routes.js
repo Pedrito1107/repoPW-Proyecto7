@@ -22,6 +22,9 @@ router.get('/student/equipos/:id', soloStudent, controller.home);
 router.get('/student/solicitar/:id', soloStudent, controller.home);
 router.get('/student/solicitudes', soloStudent, controller.home);
 
+// HU-4 · Constancia de entrega vista por el estudiante (4.5)
+router.get('/student/prestamos/:codigo/constancia', soloStudent, controller.home);
+
 // Entrega 2: aquí se registran las APIs del estudiante, también protegidas,
 // por ejemplo GET /api/v1/solicitudes (HU-3).
 

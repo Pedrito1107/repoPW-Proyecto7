@@ -1,10 +1,10 @@
 # Tema 7 — Préstamo de equipos de laboratorio
 
-## Avance: etapa 3 · HU-1 a HU-3 — Entrega 1
+## Avance: etapa 4 · HU-1 a HU-4 — Entrega 1
 
-Esta etapa contiene las historias HU-1 a HU-3. Después se agregan la HU-4
-(aprobación y entrega, etapa 4), la HU-5 (devoluciones, etapa 5), la HU-6
-(reserva anticipada, etapa 6) y la HU-7 (métricas y usuarios, versión final).
+Esta etapa contiene las historias HU-1 a HU-4. Después se agregan la HU-5
+(devoluciones, etapa 5), la HU-6 (reserva anticipada, etapa 6) y la HU-7
+(métricas y usuarios, versión final).
 
 En esta entrega los datos viven en el front: `src/data/seed.json` se copia a
 `localStorage` la primera vez. Para volver a los datos iniciales, en la consola
@@ -38,7 +38,7 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | mdelgado@aloe.ulima.edu.pe | estudiante | Mariana Delgado Ríos |  |
 | bloqueado@aloe.ulima.edu.pe | estudiante | Alejandra Huamán Solís | Cuenta bloqueada con deuda S/ 60.00 |
 | floayza@aloe.ulima.edu.pe | estudiante | Fabiana Loayza Ramos |  |
-| rmendoza@aloe.ulima.edu.pe | estudiante | Renzo Andrés Mendoza Cárdenas | Sus solicitudes aparecen en HU-3 |
+| rmendoza@aloe.ulima.edu.pe | estudiante | Renzo Andrés Mendoza Cárdenas | Sus solicitudes y préstamos aparecen en HU-3 y HU-4 |
 | gnunez@aloe.ulima.edu.pe | estudiante | Gabriel Núñez Herrera | Sin ningún préstamo |
 | lparedes@aloe.ulima.edu.pe | estudiante | Lucía Paredes Ynga |  |
 | estudiante@aloe.ulima.edu.pe | estudiante | Ana María Pérez Hernández |  |
@@ -63,10 +63,14 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | /manager/inventario/:id | Unidades, condiciones e historial (2.3–2.5) |
 | /public/catalogo · /student/catalogo | Catálogo (3.1) |
 | /student/equipos/:id · /student/solicitar/:id · /student/solicitudes | Detalle, solicitud y mis solicitudes (3.2–3.4) |
+| /manager/solicitudes · /manager/solicitudes/:codigo/entrega | Bandeja y registro de entrega (4.1–4.4) |
+| /manager/prestamos · /manager/vencidos · /manager/prestamos/:codigo/constancia | Préstamos vigentes y constancia (4.5–4.6) |
+| /student/prestamos/:codigo/constancia | Constancia vista por el estudiante (4.5) |
 
 **Todos los datos están en `src/data/seed.json`** (ya no hay `demoData.js`).
 Cada historia los lee con su servicio de `src/services/`: `catalogService` y
-`requestService` (HU-3).
+`requestService` (HU-3) y `loansService` (HU-4). Las vistas de HU-4 todavía
+solo muestran los datos: aprobar o entregar aún no los modifica.
 
 ### Capas del front
 
@@ -90,7 +94,7 @@ público), el servidor tiene **una carpeta por tipo de usuario**:
 |---|---|---|
 | `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/catalogo`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
 | `student/` | Solo rol estudiante (`soloStudent`) | `/student`, `/student/catalogo`, `/student/solicitudes`… |
-| `manager/` | Solo rol encargado (`soloManager`) | `/manager/cuenta`, `/manager/inventario`… |
+| `manager/` | Solo rol encargado (`soloManager`) | `/manager/inventario`, `/manager/solicitudes`, `/manager/prestamos`… |
 
 Cada ruta de las apps React está registrada **una por una** en el `routes.js`
 de su carpeta (sin comodines), agrupada por historia. Al agregar una página

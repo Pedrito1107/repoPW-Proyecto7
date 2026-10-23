@@ -20,6 +20,12 @@ import EquipmentFormPage from '../pages/inventory/EquipmentFormPage'
 import EquipmentDetailPage from '../pages/inventory/EquipmentDetailPage'
 import { NotFoundContent } from '../pages/errors/NotFoundPage'
 
+// HU-4 · Aprobación y entrega
+import RequestsInboxPage from '../pages/loans/RequestsInboxPage'
+import DeliveryPage from '../pages/loans/DeliveryPage'
+import DeliveryReceiptPage from '../pages/loans/DeliveryReceiptPage'
+import ActiveLoansPage from '../pages/loans/ActiveLoansPage'
+
 
 function Shell() {
   return (
@@ -74,6 +80,13 @@ function App() {
           element={<EquipmentFormPage />}
         />
 
+
+        {/* HU-4 · Aprobación y entrega */}
+        <Route path="/manager/solicitudes" element={<RequestsInboxPage />} />
+        <Route path="/manager/solicitudes/:codigo/entrega" element={<DeliveryPage />} />
+        <Route path="/manager/prestamos" element={<ActiveLoansPage />} />
+        <Route path="/manager/prestamos/:codigo/constancia" element={<DeliveryReceiptPage />} />
+        <Route path="/manager/vencidos" element={<ActiveLoansPage soloVencidos />} />
 
         <Route
           path="*"

@@ -9,6 +9,11 @@ import { useInventoryOptional } from '../context/InventoryContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { shortName, dateTime } from '../shared/format.js'
 import UserMenu from './UserMenu.jsx'
+import { listarBandeja, listarPrestamosVigentes } from '../services/loansService.js'
+
+// Datos del seed para los contadores del menú del encargado
+const BANDEJA = listarBandeja()
+const PRESTAMOS = listarPrestamosVigentes()
 
 
 function Brand({ href = '/public' }) {
@@ -260,7 +265,15 @@ export function RoleLayout({ children }) {
 
 // ---------- ENCARGADO ----------
 
-// Opciones del menú lateral. «count» muestra un contador junto a la opción.
+// Contadores del menú. «tone» pinta el contador como etiqueta de color:
+// info (azul) = hay solicitudes por atender · danger (rojo) = hay vencidos.
+// Los datos salen del seed a través de los servicios de cada historia.
+const SOLICITUDES_PENDIENTES =
+  BANDEJA.filter((s) => s.estado === 'enviada').length
+
+const PRESTAMOS_VENCIDOS =
+  PRESTAMOS.filter((p) => p.dias < 0).length
+
 const SIDEBAR = [
 
   { group: 'OPERACIÓN' },
@@ -269,6 +282,26 @@ const SIDEBAR = [
     href: '/manager/inventario',
     label: 'Inventario',
     count: (inv) => (inv ? inv.totales.total : '—')
+  },
+
+  {
+    href: '/manager/solicitudes',
+    label: 'Solicitudes',
+    count: () => SOLICITUDES_PENDIENTES,
+    tone: 'info'
+  },
+
+  {
+    href: '/manager/prestamos',
+    label: 'Préstamos vigentes',
+    count: () => PRESTAMOS.length
+  },
+
+  {
+    href: '/manager/vencidos',
+    label: 'Vencidos',
+    count: () => PRESTAMOS_VENCIDOS,
+    tone: 'danger'
   }
 
 ]
@@ -362,6 +395,18 @@ export function ManagerLayout({ children }) {
 
 
           <div className="site-header-actions">
+
+            {/* Solicitudes por atender, siempre visible (mockup 2.1) */}
+            <SmartLink
+              href="/manager/solicitudes"
+              className="header-pending"
+              activeClassName=""
+            >
+              Solicitudes pendientes
+              <span className="header-pending-count">
+                {SOLICITUDES_PENDIENTES}
+              </span>
+            </SmartLink>
 
             {/* «Elena Rivas · H-102» + avatar con menú (Mi cuenta / Cerrar sesión) */}
             <UserMenu
