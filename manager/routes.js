@@ -29,7 +29,13 @@ router.get('/manager/prestamos', soloManager, controller.home);
 router.get('/manager/prestamos/:codigo/constancia', soloManager, controller.home);
 router.get('/manager/vencidos', soloManager, controller.home);
 
+// HU-5 · Devoluciones (5.1 – 5.5) · /manager/usuarios/:id es el historial
+// del estudiante (5.4)
+router.get('/manager/devoluciones', soloManager, controller.home);
+router.get('/manager/devoluciones/:codigo', soloManager, controller.home);
+router.get('/manager/usuarios/:id', soloManager, controller.home);
+
 // Entrega 2: aquí se registran las APIs del encargado, también protegidas,
-// por ejemplo POST /api/v1/solicitudes/:codigo/entrega (HU-4).
+// por ejemplo POST /api/v1/solicitudes/:codigo/entrega (HU-4) o POST /api/v1/devoluciones (HU-5).
 
 export default router;

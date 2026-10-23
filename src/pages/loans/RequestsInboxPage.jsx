@@ -85,7 +85,9 @@ export default function RequestsInboxPage() {
               {BANDEJA.map((s) => (
                 <tr key={s.id} className={s.deuda ? 'row-highlight' : ''}>
                   <td>
-                    <span className="strong">{s.estudiante}</span>
+                    {s.usuarioId
+                      ? <Link to={'/manager/usuarios/' + s.usuarioId} className="cell-title">{s.estudiante}</Link>
+                      : <span className="strong">{s.estudiante}</span>}
                     {s.deuda
                       ? <div className="debt-flag">Deuda {s.deuda}</div>
                       : <div className="cell-sub">{s.carrera}</div>}

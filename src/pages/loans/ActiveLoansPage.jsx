@@ -1,15 +1,18 @@
 // src/pages/loans/ActiveLoansPage.jsx
 // HU-4 · 4.6 Préstamos vigentes (y vista «Vencidos» del menú lateral)
-// Solo diseño y navegación. En la HU-5 se agregan las acciones
-// «Registrar devolución» y «Renovar».
+// Solo diseño y navegación: «Renovar» abre el modal de HU-5 (5.3) sin renovar.
 
+// src/pages/loans/ActiveLoansPage.jsx
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { DueIndicator } from '../../components/ui.jsx'
+import { RenewalModal } from '../returns/RenewalModal.jsx'
 import { listarPrestamosVigentes } from '../../services/loansService.js'
 
 // Préstamos vigentes del seed (HU-4)
 const PRESTAMOS = listarPrestamosVigentes()
 
-function LoanTable({ rows, lastHeader, variant = '' }) {
+function LoanTable({ rows, lastHeader, onRenew, variant = '' }) {
   return (
     <div className={`loans-card ${variant}`}>
       <div className="table-wrap">
@@ -21,6 +24,7 @@ function LoanTable({ rows, lastHeader, variant = '' }) {
               <th>ESTUDIANTE</th>
               <th>VENCIMIENTO</th>
               <th>{lastHeader}</th>
+              <th>ACCIÓN</th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +36,19 @@ function LoanTable({ rows, lastHeader, variant = '' }) {
                 <td>{p.estudiante}</td>
                 <td className="mono">{p.vence}</td>
                 <td><DueIndicator dias={p.dias} /></td>
+                <td className="actions">
+                  <Link to={'/manager/devoluciones/' + p.codigo} className="link-action">
+                    {p.dias > 0 ? 'Devolución' : 'Registrar devolución'}
+                  </Link>
+                  {p.dias > 0 && (
+                    <>
+                      <span className="action-dot">·</span>
+                      <button type="button" className="btn-link link-action" onClick={() => onRenew(p)}>
+                        Renovar
+                      </button>
+                    </>
+                  )}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -42,6 +59,8 @@ function LoanTable({ rows, lastHeader, variant = '' }) {
 }
 
 export default function ActiveLoansPage({ soloVencidos = false }) {
+  const [renovar, setRenovar] = useState(null)
+
   const vencidos = PRESTAMOS.filter((p) => p.dias < 0)
   const hoy = PRESTAMOS.filter((p) => p.dias === 0)
   const enCurso = PRESTAMOS.filter((p) => p.dias > 0)
@@ -65,22 +84,24 @@ export default function ActiveLoansPage({ soloVencidos = false }) {
 
       <section className="loan-section">
         <h2 className="loan-section-title danger">VENCIDOS · {vencidos.length}</h2>
-        <LoanTable rows={vencidos} lastHeader="RETRASO" variant="border-danger" />
+        <LoanTable rows={vencidos} lastHeader="RETRASO" onRenew={setRenovar} variant="border-danger" />
       </section>
 
       {!soloVencidos && (
         <>
           <section className="loan-section">
             <h2 className="loan-section-title warning">VENCEN HOY · {hoy.length}</h2>
-            <LoanTable rows={hoy} lastHeader="RETRASO" variant="border-warning bg-warning-light" />
+            <LoanTable rows={hoy} lastHeader="RETRASO" onRenew={setRenovar} variant="border-warning bg-warning-light" />
           </section>
 
           <section className="loan-section">
             <h2 className="loan-section-title">EN CURSO · {enCurso.length}</h2>
-            <LoanTable rows={enCurso} lastHeader="DÍAS RESTANTES" variant="border-default" />
+            <LoanTable rows={enCurso} lastHeader="DÍAS RESTANTES" onRenew={setRenovar} variant="border-default" />
           </section>
         </>
       )}
+
+      {renovar && <RenewalModal prestamo={renovar} onClose={() => setRenovar(null)} />}
     </div>
   )
 }

@@ -302,6 +302,12 @@ const SIDEBAR = [
     label: 'Vencidos',
     count: () => PRESTAMOS_VENCIDOS,
     tone: 'danger'
+  },
+
+  {
+    href: '/manager/devoluciones',
+    label: 'Devoluciones',
+    count: () => '–'
   }
 
 ]

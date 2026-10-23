@@ -1,7 +1,7 @@
 // manager/controllers.js
-// Sirve la app React del ENCARGADO: inventario (HU-2) y aprobación y entrega
-// (HU-4). Las rutas internas las resuelve React Router. El usuario de la
-// sesión llega como window.USER (sin contraseña).
+// Sirve la app React del ENCARGADO: inventario (HU-2), aprobación y entrega
+// (HU-4) y devoluciones (HU-5). Las rutas internas las resuelve React Router.
+// El usuario de la sesión llega como window.USER (sin contraseña).
 import { usuarioParaVista } from '../configs/helpers.js';
 
 export function home(req, res) {

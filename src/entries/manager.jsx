@@ -25,6 +25,9 @@ import RequestsInboxPage from '../pages/loans/RequestsInboxPage'
 import DeliveryPage from '../pages/loans/DeliveryPage'
 import DeliveryReceiptPage from '../pages/loans/DeliveryReceiptPage'
 import ActiveLoansPage from '../pages/loans/ActiveLoansPage'
+// HU-5 · Devoluciones
+import ReturnPage from '../pages/returns/ReturnPage'
+import StudentHistoryPage from '../pages/returns/StudentHistoryPage'
 
 
 function Shell() {
@@ -87,6 +90,11 @@ function App() {
         <Route path="/manager/prestamos" element={<ActiveLoansPage />} />
         <Route path="/manager/prestamos/:codigo/constancia" element={<DeliveryReceiptPage />} />
         <Route path="/manager/vencidos" element={<ActiveLoansPage soloVencidos />} />
+
+        {/* HU-5 · Devoluciones */}
+        <Route path="/manager/devoluciones" element={<ReturnPage />} />
+        <Route path="/manager/devoluciones/:codigo" element={<ReturnPage />} />
+        <Route path="/manager/usuarios/:id" element={<StudentHistoryPage />} />
 
         <Route
           path="*"
