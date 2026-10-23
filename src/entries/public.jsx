@@ -1,11 +1,12 @@
 // src/entries/public.jsx
-// App del visitante: landing, acceso, registro y recuperación.
+// App del visitante: landing, acceso, registro, recuperación y ficha pública.
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 
 import { AuthProvider } from '../context/AuthContext.jsx'
+import { InventoryProvider } from '../context/InventoryContext.jsx'
 import { ToastProvider } from '../context/ToastContext.jsx'
 import { PublicLayout } from '../components/layouts.jsx'
 
@@ -15,6 +16,7 @@ import RegisterStudentPage from '../pages/account/RegisterStudentPage'
 import RegisterManagerPage from '../pages/account/RegisterManagerPage'
 import RecoverPasswordPage from '../pages/account/RecoverPasswordPage'
 import RulesPage, { HelpPage } from '../pages/account/RulesPage'
+import PublicEquipmentPage from '../pages/inventory/PublicEquipmentPage'
 import { NotFoundContent } from '../pages/errors/NotFoundPage'
 
 function Shell() {
@@ -36,6 +38,7 @@ function App() {
         <Route path="/public/recover-password" element={<RecoverPasswordPage />} />
         <Route path="/public/reglas" element={<RulesPage />} />
         <Route path="/public/ayuda" element={<HelpPage />} />
+        <Route path="/public/equipos/:id" element={<PublicEquipmentPage />} />
         <Route path="*" element={<NotFoundContent />} />
       </Route>
     </Routes>
@@ -50,7 +53,9 @@ if (container) {
       <BrowserRouter>
         <AuthProvider>
           <ToastProvider>
-            <App />
+            <InventoryProvider>
+              <App />
+            </InventoryProvider>
           </ToastProvider>
         </AuthProvider>
       </BrowserRouter>

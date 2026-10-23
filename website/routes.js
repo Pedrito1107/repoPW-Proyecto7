@@ -25,6 +25,9 @@ router.get('/public/recover-password', redirigirSiLogueado, controller.home);
 router.get('/public/reglas', controller.home);
 router.get('/public/ayuda', controller.home);
 
+// HU-2 · Ficha pública del equipo (2.6)
+router.get('/public/equipos/:id', controller.home);
+
 // Sesión y cuentas (HU-1)
 router.post('/login', controller.ingresar);
 router.get('/logout-project', controller.logoutProject);

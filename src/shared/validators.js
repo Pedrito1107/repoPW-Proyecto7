@@ -84,6 +84,31 @@ export function validateManagerRegistration(data) {
   return errors
 }
 
+// Equipo del inventario (HU-2). Un borrador solo exige el nombre;
+// para publicarlo se exigen todos los campos.
+export function validateEquipoData(data, borrador, { categorias, maxDescripcion }) {
+  const errors = {}
+  if (isEmpty(data.nombre)) errors.nombre = 'El nombre es obligatorio.'
+  if (data.descripcion.length > maxDescripcion) {
+    errors.descripcion = 'Máximo ' + maxDescripcion + ' caracteres.'
+  }
+  if (data.fotos.some((f) => !isUrl(f))) {
+    errors.fotos = 'Cada fotografía debe ser una URL válida (http o https).'
+  }
+  const repetido = data.accesorios.find(
+    (a, i) => data.accesorios.findIndex((b) => b.toLowerCase() === a.toLowerCase()) !== i
+  )
+  if (repetido) errors.accesorios = 'El accesorio «' + repetido + '» está repetido.'
+
+  if (!borrador) {
+    if (!categorias.includes(data.categoria)) errors.categoria = 'Selecciona una categoría.'
+    if (isEmpty(data.marca)) errors.marca = 'La marca es obligatoria.'
+    if (isEmpty(data.modelo)) errors.modelo = 'El modelo es obligatorio.'
+    if (isEmpty(data.descripcion)) errors.descripcion = 'La descripción es obligatoria.'
+  }
+  return errors
+}
+
 export function hasErrors(errors) {
   return Object.keys(errors).length > 0
 }

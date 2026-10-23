@@ -10,18 +10,24 @@ import {
   Outlet
 } from 'react-router-dom'
 
+import { InventoryProvider } from '../context/InventoryContext.jsx'
 import { ToastProvider } from '../context/ToastContext.jsx'
 import { ManagerLayout } from '../components/layouts.jsx'
 
 import MyAccountPage from '../pages/account/MyAccountPage'
+import InventoryPage from '../pages/inventory/InventoryPage'
+import EquipmentFormPage from '../pages/inventory/EquipmentFormPage'
+import EquipmentDetailPage from '../pages/inventory/EquipmentDetailPage'
 import { NotFoundContent } from '../pages/errors/NotFoundPage'
 
 
 function Shell() {
   return (
-    <ManagerLayout>
-      <Outlet />
-    </ManagerLayout>
+    <InventoryProvider>
+      <ManagerLayout>
+        <Outlet />
+      </ManagerLayout>
+    </InventoryProvider>
   )
 }
 
@@ -36,7 +42,7 @@ function App() {
           path="/manager"
           element={
             <Navigate
-              to="/manager/cuenta"
+              to="/manager/inventario"
               replace
             />
           }
@@ -45,6 +51,27 @@ function App() {
         <Route
           path="/manager/cuenta"
           element={<MyAccountPage />}
+        />
+
+
+        <Route
+          path="/manager/inventario"
+          element={<InventoryPage />}
+        />
+
+        <Route
+          path="/manager/inventario/nuevo"
+          element={<EquipmentFormPage />}
+        />
+
+        <Route
+          path="/manager/inventario/:id"
+          element={<EquipmentDetailPage />}
+        />
+
+        <Route
+          path="/manager/inventario/:id/editar"
+          element={<EquipmentFormPage />}
         />
 
 

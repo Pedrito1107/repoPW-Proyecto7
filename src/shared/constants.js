@@ -45,6 +45,16 @@ export const ESTADOS_UNIDAD = {
   baja: 'Dada de baja'
 }
 
+// Transiciones permitidas desde la vista de inventario.
+// "prestada" solo se asigna al registrar una entrega (HU-4) y se libera
+// al registrar la devolución (HU-5); por eso no aparece como destino manual.
+export const TRANSICIONES_UNIDAD = {
+  disponible: ['mantenimiento', 'baja'],
+  mantenimiento: ['disponible', 'baja'],
+  prestada: [],
+  baja: []
+}
+
 export const ESTADOS_USUARIO = {
   habilitado: 'Habilitado',
   con_deuda: 'Con deuda',
@@ -53,6 +63,7 @@ export const ESTADOS_USUARIO = {
 }
 
 export const MAX_INTENTOS_LOGIN = 5
+export const MAX_DESCRIPCION = 400
 
 // Fecha de corte de los datos de la Entrega 1 (el "hoy" de todas las vistas).
 // En la Entrega 2 será la fecha del servidor.

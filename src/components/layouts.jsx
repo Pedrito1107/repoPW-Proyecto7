@@ -2,8 +2,10 @@
 // Cabeceras, navegación y pie de página de los tres tipos de vista:
 // pública (visitante), estudiante y panel del encargado.
 
-import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import SmartLink from './SmartLink.jsx'
+import { useInventoryOptional } from '../context/InventoryContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import { shortName, dateTime } from '../shared/format.js'
 import UserMenu from './UserMenu.jsx'
@@ -240,11 +242,12 @@ export function RoleLayout({ children }) {
 // Opciones del menú lateral. «count» muestra un contador junto a la opción.
 const SIDEBAR = [
 
-  { group: 'CUENTA' },
+  { group: 'OPERACIÓN' },
 
   {
-    href: '/manager/cuenta',
-    label: 'Mi cuenta'
+    href: '/manager/inventario',
+    label: 'Inventario',
+    count: (inv) => (inv ? inv.totales.total : '—')
   }
 
 ]
@@ -253,6 +256,46 @@ const SIDEBAR = [
 export function ManagerLayout({ children }) {
 
   const { user } = useAuth()
+
+  const inventory = useInventoryOptional()
+
+  const navigate = useNavigate()
+
+  const [codigo, setCodigo] = useState('')
+
+
+  function buscar(e) {
+
+    e.preventDefault()
+
+    const value =
+      codigo.trim().toUpperCase()
+
+    if (!value) return
+
+
+    const target =
+      '/manager/inventario?codigo=' +
+      encodeURIComponent(value)
+
+
+    if (
+      window.location.pathname.startsWith('/manager')
+    ) {
+
+      navigate(target)
+
+    } else {
+
+      window.location.href = target
+
+    }
+
+
+    setCodigo('')
+
+  }
+
 
   return (
     <div className="app-shell">
@@ -265,13 +308,36 @@ export function ManagerLayout({ children }) {
 
           <div className="site-header-left">
 
-            <Brand href="/manager/cuenta" />
+            <Brand href="/manager/inventario" />
 
             <span className="panel-label">
               PANEL DEL ENCARGADO
             </span>
 
           </div>
+
+
+          <form
+            className="manager-search"
+            onSubmit={buscar}
+            role="search"
+          >
+
+            <span aria-hidden="true">
+              ⌕
+            </span>
+
+            <input
+              type="search"
+              value={codigo}
+              onChange={(e) =>
+                setCodigo(e.target.value)
+              }
+              placeholder="Buscar por código de inventario: INV-OSC-0042"
+              aria-label="Buscar por código de inventario"
+            />
+
+          </form>
 
 
           <div className="site-header-actions">
@@ -336,7 +402,7 @@ export function ManagerLayout({ children }) {
                         : 'sidebar-counter'
                     }
                   >
-                    {item.count()}
+                    {item.count(inventory)}
                   </span>
 
                 )}

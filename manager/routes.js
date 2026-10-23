@@ -10,13 +10,19 @@ import { soloManager } from '../configs/middlewares.js';
 
 const router = Router();
 
-// Inicio del encargado (React lo lleva a Mi cuenta)
+// Inicio del encargado (React lo lleva al inventario)
 router.get('/manager', soloManager, controller.home);
 
 // HU-1 · Mi cuenta (1.6)
 router.get('/manager/cuenta', soloManager, controller.home);
 
+// HU-2 · Inventario (2.1 – 2.5)
+router.get('/manager/inventario', soloManager, controller.home);
+router.get('/manager/inventario/nuevo', soloManager, controller.home);
+router.get('/manager/inventario/:id', soloManager, controller.home);
+router.get('/manager/inventario/:id/editar', soloManager, controller.home);
+
 // Entrega 2: aquí se registran las APIs del encargado, también protegidas,
-// por ejemplo PUT /api/v1/cuenta (HU-1).
+// por ejemplo POST /api/v1/equipos (HU-2).
 
 export default router;

@@ -1,13 +1,11 @@
 # Tema 7 — Préstamo de equipos de laboratorio
 
-## Avance: etapa 1 · HU-1 — Entrega 1
+## Avance: etapa 2 · HU-1 y HU-2 — Entrega 1
 
-Esta etapa contiene solo la HU-1 (cuenta y acceso): landing, inicio de sesión,
-registro de estudiante y de encargado, recuperación de contraseña, Mi cuenta y
-las páginas de error. Después se agregan la HU-2 (inventario, etapa 2), la HU-3
-(catálogo y solicitud, etapa 3), la HU-4 (aprobación y entrega, etapa 4), la
-HU-5 (devoluciones, etapa 5), la HU-6 (reserva anticipada, etapa 6) y la HU-7
-(métricas y usuarios, versión final).
+Esta etapa contiene las historias HU-1 (cuenta y acceso) y HU-2 (inventario).
+Después se agregan la HU-3 (catálogo y solicitud, etapa 3), la HU-4
+(aprobación y entrega, etapa 4), la HU-5 (devoluciones, etapa 5), la HU-6
+(reserva anticipada, etapa 6) y la HU-7 (métricas y usuarios, versión final).
 
 En esta entrega los datos viven en el front: `src/data/seed.json` se copia a
 `localStorage` la primera vez. Para volver a los datos iniciales, en la consola
@@ -59,16 +57,21 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 |---|---|
 | /public | Landing (1.1) |
 | /public/login · /public/register · /public/register-manager · /public/recover-password | HU-1 |
+| /public/equipos/:id | Ficha pública del equipo (2.6) |
 | /student/cuenta · /manager/cuenta | Mi cuenta (1.6) |
+| /manager/inventario | Inventario (2.1) |
+| /manager/inventario/nuevo · /manager/inventario/:id/editar | Nuevo / editar equipo (2.2) |
+| /manager/inventario/:id | Unidades, condiciones e historial (2.3–2.5) |
 
 **Todos los datos están en `src/data/seed.json`** (ya no hay `demoData.js`).
-Cada historia los lee con su servicio de `src/services/`: `authService` (HU-1).
+Cada historia los lee con su servicio de `src/services/`: `authService` (HU-1)
+e `inventoryService` (HU-2).
 
 ### Capas del front
 
     src/data/seed.json        datos semilla (contrato en docs/contrato-datos.md)
     src/services/             acceso a datos (en la Entrega 2 se cambian por fetch a la API)
-    src/context/              estado global con Context: Auth, Toast
+    src/context/              estado global con Context: Auth, Inventory, Toast
     src/components/           componentes comunes: layouts, badges, modal, paginación, RequireRole
     src/pages/                vistas (no acceden a datos directamente, usan los contextos)
     public/assets/css/app.css sistema de diseño compartido
@@ -84,9 +87,9 @@ público), el servidor tiene **una carpeta por tipo de usuario**:
 
 | Carpeta | Quién entra | Rutas |
 |---|---|---|
-| `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/register`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
+| `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/equipos/:id`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
 | `student/` | Solo rol estudiante (`soloStudent`) | `/student`, `/student/cuenta` |
-| `manager/` | Solo rol encargado (`soloManager`) | `/manager`, `/manager/cuenta` |
+| `manager/` | Solo rol encargado (`soloManager`) | `/manager/cuenta`, `/manager/inventario`… |
 
 Cada ruta de las apps React está registrada **una por una** en el `routes.js`
 de su carpeta (sin comodines), agrupada por historia. Al agregar una página
