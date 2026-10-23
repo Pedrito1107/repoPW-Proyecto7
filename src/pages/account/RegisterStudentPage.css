@@ -1,0 +1,798 @@
+:root {
+  --student-primary: #17505c;
+  --student-primary-dark: #0e3a43;
+  --student-primary-soft: #e3eef0;
+
+  --student-bg: #f5f7f8;
+  --student-surface: #ffffff;
+  --student-border: #dbe2e2;
+
+  --student-text: #11221f;
+  --student-muted: #5e7b73;
+
+  --student-success: #1f7f4d;
+  --student-danger: #b4322b;
+
+  --student-footer: #102522;
+}
+
+
+/* ===================================
+   GENERAL
+=================================== */
+
+.student-register-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--student-bg);
+  color: var(--student-text);
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.student-register-page * {
+  box-sizing: border-box;
+}
+
+
+/* ===================================
+   HEADER
+=================================== */
+
+.student-register-header {
+  width: 100%;
+  height: 76px;
+
+  background: var(--student-surface);
+
+  border-bottom: 1px solid var(--student-border);
+}
+
+.student-register-header-container {
+  width: 84%;
+  max-width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.student-register-header-left {
+  display: flex;
+  align-items: center;
+
+  gap: 42px;
+}
+
+
+/* MARCA */
+
+.student-register-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--student-primary);
+
+  font-size: 17px;
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.student-register-brand-square {
+  width: 27px;
+  height: 27px;
+
+  background: var(--student-primary);
+
+  border-radius: 4px;
+}
+
+
+/* NAVEGACIÓN */
+
+.student-register-nav {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+}
+
+.student-register-nav a {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--student-muted);
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  border-bottom: 2px solid transparent;
+}
+
+.student-register-nav a:hover {
+  color: var(--student-primary);
+}
+
+
+/* BOTONES HEADER */
+
+.student-register-header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.student-register-login-button,
+.student-register-create-button {
+  height: 40px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.student-register-login-button {
+  background: #ffffff;
+
+  color: var(--student-primary);
+
+  border: 1px solid var(--student-primary);
+}
+
+.student-register-create-button {
+  background: var(--student-primary);
+
+  color: #ffffff;
+
+  border: 1px solid var(--student-primary);
+}
+
+
+/* ===================================
+   CONTENIDO
+=================================== */
+
+.student-register-content {
+  flex: 1;
+
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 34px 20px 38px;
+}
+
+
+/* ===================================
+   TARJETA
+=================================== */
+
+.student-register-card {
+  width: 820px;
+
+  padding: 30px 30px 28px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--student-border);
+
+  border-radius: 4px;
+}
+
+.student-register-card h1 {
+  margin: 0 0 7px;
+
+  color: var(--student-text);
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.student-register-description {
+  margin: 0 0 26px;
+
+  color: var(--student-muted);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* ===================================
+   TÍTULOS DE SECCIÓN
+=================================== */
+
+.student-register-section-title {
+  margin: 0 0 16px;
+
+  padding-bottom: 9px;
+
+  color: var(--student-primary);
+
+  border-bottom: 1px solid var(--student-border);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+.student-register-access-title {
+  margin-top: 2px;
+}
+
+
+/* ===================================
+   FILAS
+=================================== */
+
+.student-register-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+}
+
+
+/* ===================================
+   CAMPOS
+=================================== */
+
+.student-register-field {
+  margin-bottom: 15px;
+}
+
+.student-register-field label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--student-text);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.student-register-field input,
+.student-register-field select {
+  width: 100%;
+  height: 38px;
+
+  padding: 0 11px;
+
+  background: #ffffff;
+
+  color: var(--student-text);
+
+  border: 1px solid var(--student-border);
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 12px;
+
+  outline: none;
+}
+
+.student-register-field input:focus,
+.student-register-field select:focus {
+  border-color: var(--student-primary);
+}
+
+.student-register-field input::placeholder {
+  color: #758789;
+}
+
+.student-register-field small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--student-muted);
+
+  font-size: 10px;
+}
+
+
+/* ===================================
+   VALIDACIONES
+=================================== */
+
+.student-register-input-error {
+  border-color: var(--student-danger) !important;
+
+  background: #fffafa !important;
+}
+
+.student-register-field-error {
+  display: block;
+
+  min-height: 12px;
+
+  margin-top: 4px;
+
+  color: var(--student-danger);
+
+  font-size: 10px;
+}
+
+
+/* RESUMEN */
+
+.student-register-summary {
+  margin-top: 10px;
+
+  padding: 9px 10px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+}
+
+.student-register-summary-error {
+  display: block;
+
+  background: #fff2f1;
+
+  color: var(--student-danger);
+
+  border: 1px solid #e6aaa5;
+
+  border-left: 4px solid var(--student-danger);
+}
+
+
+/* ===================================
+   CORREO EXISTENTE
+=================================== */
+
+.student-register-result {
+  margin-bottom: 18px;
+
+  padding: 11px 12px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+.student-register-result-error {
+  display: block;
+
+  background: #fff2f1;
+
+  color: #8a2d28;
+
+  border: 1px solid var(--student-danger);
+
+  border-left: 4px solid var(--student-danger);
+}
+
+
+/* ===================================
+   REGLAMENTO
+=================================== */
+
+.student-register-rules {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 2px;
+
+  color: var(--student-muted);
+
+  font-size: 11px;
+
+  line-height: 1.45;
+}
+
+.student-register-rules input {
+  margin-top: 2px;
+}
+
+
+/* ===================================
+   ACCIONES
+=================================== */
+
+.student-register-actions {
+  margin-top: 18px;
+
+  padding-top: 16px;
+
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  border-top: 1px solid var(--student-border);
+}
+
+.student-register-cancel,
+.student-register-submit {
+  height: 40px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.student-register-cancel {
+  background: #ffffff;
+
+  color: var(--student-primary);
+
+  border: 1px solid var(--student-primary);
+}
+
+.student-register-submit {
+  background: var(--student-primary);
+
+  color: #ffffff;
+
+  border: 1px solid var(--student-primary);
+
+  cursor: pointer;
+}
+
+.student-register-submit:hover {
+  background: var(--student-primary-dark);
+}
+
+
+/* ===================================
+   CAMBIO ESTUDIANTE / ENCARGADO
+=================================== */
+
+.register-switch {
+  margin-top: 16px;
+
+  text-align: center;
+
+  color: var(--student-muted);
+
+  font-size: 11px;
+}
+
+.register-switch a {
+  color: var(--student-primary);
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.register-switch a:hover {
+  text-decoration: underline;
+}
+
+
+/* ===================================
+   CUENTA CREADA
+=================================== */
+
+.student-register-success {
+  width: 570px;
+
+  margin-top: 20px;
+
+  padding: 32px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--student-border);
+
+  border-radius: 4px;
+
+  text-align: center;
+}
+
+.student-register-success-icon {
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef8f2;
+
+  color: var(--student-success);
+
+  border: 1px solid var(--student-success);
+
+  border-radius: 4px;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.student-register-success h2 {
+  margin: 0 0 8px;
+
+  color: var(--student-text);
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.student-register-success p {
+  margin: 0;
+
+  color: var(--student-muted);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+.student-register-success-actions {
+  margin-top: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+.student-register-success-button,
+.student-register-success-secondary {
+  min-width: 130px;
+  height: 40px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 12px !important;
+  font-weight: 600;
+
+  text-decoration: none !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.student-register-success-button {
+  min-width: 170px;
+
+  background: var(--student-primary);
+
+  color: #ffffff !important;
+
+  border: 1px solid var(--student-primary);
+}
+
+.student-register-success-button:hover,
+.student-register-success-button:visited,
+.student-register-success-button:active,
+.student-register-success-button:focus {
+  background: var(--student-primary-dark);
+
+  color: #ffffff !important;
+
+  text-decoration: none !important;
+}
+
+.student-register-success-secondary {
+  background: #ffffff;
+
+  color: var(--student-primary) !important;
+
+  border: 1px solid var(--student-primary);
+
+  cursor: pointer;
+}
+
+.student-register-success-secondary:hover {
+  background: #f3f7f7;
+
+  color: var(--student-primary) !important;
+}
+
+
+/* ===================================
+   OCULTAR
+=================================== */
+
+.student-register-hidden {
+  display: none;
+}
+
+
+/* ===================================
+   FOOTER
+=================================== */
+
+.student-register-footer {
+  width: 100%;
+
+  background: var(--student-footer);
+
+  color: #ffffff;
+}
+
+.student-register-footer-container {
+  width: 84%;
+  max-width: 1600px;
+
+  min-height: 76px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.student-register-footer-left {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  font-size: 10px;
+}
+
+.student-register-footer-left strong {
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+.student-register-footer-right {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+
+  font-size: 10px;
+}
+
+.student-register-footer-right a {
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+
+/* ===================================
+   RESPONSIVE
+=================================== */
+
+@media (max-width: 900px) {
+
+  .student-register-header {
+    height: auto;
+  }
+
+  .student-register-header-container {
+    width: 92%;
+
+    padding: 18px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+  }
+
+  .student-register-header-left {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 14px;
+  }
+
+  .student-register-nav {
+    height: auto;
+
+    flex-wrap: wrap;
+  }
+
+  .student-register-nav a {
+    height: auto;
+  }
+
+  .student-register-card {
+    width: 100%;
+  }
+
+  .student-register-row {
+    grid-template-columns: 1fr;
+  }
+
+  .student-register-success {
+    width: 100%;
+  }
+
+  .student-register-footer-container {
+    width: 92%;
+
+    padding: 20px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .student-register-footer-right {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 6px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .student-register-success-actions {
+    flex-direction: column;
+  }
+
+  .student-register-success-button,
+  .student-register-success-secondary {
+    width: 100%;
+  }
+}

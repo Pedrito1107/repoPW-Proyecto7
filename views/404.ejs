@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>404 | Página no encontrada</title>
+
+  <link
+    rel="stylesheet"
+    href="/assets/css/errors.css"
+  >
+
+</head>
+
+
+<body>
+
+  <!-- HEADER (compartido con Mi cuenta / Salir) -->
+  <%- include('partials/_error_header') %>
+
+
+
+  <!-- CONTENIDO -->
+
+  <main class="error-main">
+
+    <div class="error-box">
+
+      <div class="error-icon">
+        ?
+      </div>
+
+
+      <span class="error-code">
+        ERROR 404 · PÁGINA NO ENCONTRADA
+      </span>
+
+
+      <h1>
+        No encontramos la página que buscas
+      </h1>
+
+
+      <p>
+        Es posible que el enlace sea incorrecto,
+        que la página haya cambiado de ubicación
+        o que ya no esté disponible.
+      </p>
+
+
+      <div class="error-actions">
+
+        <%
+          const rolInicio = locals.session && locals.session.role
+          const inicioHref = rolInicio === 'manager' ? '/manager'
+            : rolInicio === 'student' ? '/student' : '/public'
+        %>
+        <a
+          href="<%= inicioHref %>"
+          class="error-btn error-btn-primary"
+        >
+          Ir al inicio
+        </a>
+
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+
+  <footer class="error-footer">
+
+    <div class="error-footer-content">
+
+      <div>
+
+        <strong>
+          Almacén de Equipos · Facultad de Ingeniería
+        </strong>
+
+        <p>
+          Universidad de Lima
+        </p>
+
+      </div>
+
+
+      <div class="error-footer-right">
+
+        <span>
+          Reglamento de préstamo
+        </span>
+
+        <span>
+          almacen.equipos@ulima.edu.pe
+        </span>
+
+        <span>
+          Anexo 3120
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>403 | Acceso denegado</title>
+
+  <link
+    rel="stylesheet"
+    href="/assets/css/errors.css"
+  >
+</head>
+
+
+<body>
+
+  <!-- HEADER (compartido con Mi cuenta / Salir) -->
+  <%- include('partials/_error_header') %>
+
+
+  <!-- CONTENIDO -->
+
+  <main class="error-main">
+
+    <div class="error-box">
+
+      <div class="error-icon">
+        !
+      </div>
+
+
+      <span class="error-code">
+        ERROR 403 · ACCESO DENEGADO
+      </span>
+
+
+      <h1>
+        No tienes permiso para ver esta página
+      </h1>
+
+
+      <p>
+
+        <% if (session && session.role === 'student') { %>
+
+          Esta sección pertenece al panel del encargado de almacén.
+          Si crees que es un error, escribe a
+          almacen.equipos@ulima.edu.pe indicando tu código de estudiante.
+
+        <% } else if (session && session.role === 'manager') { %>
+
+          Esta sección pertenece al área de estudiantes.
+          Tu cuenta de encargado no tiene permisos para acceder a ella.
+
+        <% } else { %>
+
+          No tienes los permisos necesarios para acceder a esta sección.
+
+        <% } %>
+
+      </p>
+
+
+      <div class="error-actions">
+
+        <% if (session && session.role === 'student') { %>
+
+          <a
+            href="/student/cuenta"
+            class="error-btn error-btn-primary"
+          >
+            Ir a mi cuenta
+          </a>
+
+        <% } else if (session && session.role === 'manager') { %>
+
+          <a
+            href="/manager/cuenta"
+            class="error-btn error-btn-primary"
+          >
+            Ir a mi cuenta
+          </a>
+
+        <% } else { %>
+
+          <a
+            href="/public"
+            class="error-btn error-btn-primary"
+          >
+            Ir al inicio
+          </a>
+
+        <% } %>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- FOOTER -->
+
+  <footer class="error-footer">
+
+    <div class="error-footer-content">
+
+      <div>
+
+        <strong>
+          Almacén de Equipos · Facultad de Ingeniería
+        </strong>
+
+        <p>
+          Universidad de Lima
+        </p>
+
+      </div>
+
+
+      <div class="error-footer-right">
+
+        <span>
+          Reglamento de préstamo
+        </span>
+
+        <span>
+          almacen.equipos@ulima.edu.pe
+        </span>
+
+        <span>
+          Anexo 3120
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+</body>
+
+</html>

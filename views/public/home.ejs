@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Tipografías del sistema de diseño: Barlow + Roboto Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap">
+
+  <!-- Estilos compartidos (componentes comunes) y estilos propios de esta app -->
+  <link rel="stylesheet" href="/assets/css/app.css">
+  <link rel="stylesheet" href="/dist/css/public.css">
+
+  <title><%= title %></title>
+</head>
+<body>
+  <div id="root"></div>
+  <!-- Usuario de la sesión (null si no inició sesión) para la app React -->
+  <script>window.USER = <%- usuarioJson %>;</script>
+  <script type="module" src="/dist/js/public.js"></script>
+</body>
+</html>

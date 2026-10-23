@@ -1,0 +1,773 @@
+:root {
+  --manager-primary: #17505c;
+  --manager-primary-dark: #0e3a43;
+
+  --manager-bg: #f5f7f8;
+  --manager-surface: #ffffff;
+  --manager-border: #dbe2e2;
+
+  --manager-text: #11221f;
+  --manager-muted: #5e7b73;
+
+  --manager-success: #1f7f4d;
+  --manager-warning: #b7791f;
+  --manager-warning-soft: #fff7e5;
+
+  --manager-danger: #b4322b;
+
+  --manager-footer: #102522;
+}
+
+
+/* =================================
+   GENERAL
+================================= */
+
+.manager-register-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--manager-bg);
+
+  color: var(--manager-text);
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.manager-register-page * {
+  box-sizing: border-box;
+}
+
+
+/* =================================
+   HEADER
+================================= */
+
+.manager-register-header {
+  width: 100%;
+  height: 76px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid var(--manager-border);
+}
+
+.manager-register-header-container {
+  width: 84%;
+  max-width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.manager-register-header-left {
+  display: flex;
+  align-items: center;
+
+  gap: 42px;
+}
+
+
+/* MARCA */
+
+.manager-register-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  color: var(--manager-primary);
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.manager-register-brand-square {
+  width: 27px;
+  height: 27px;
+
+  background: var(--manager-primary);
+
+  border-radius: 4px;
+}
+
+
+/* NAV */
+
+.manager-register-nav {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+}
+
+.manager-register-nav a {
+  height: 76px;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--manager-muted);
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  border-bottom: 2px solid transparent;
+}
+
+.manager-register-nav a:hover {
+  color: var(--manager-primary);
+}
+
+
+/* BOTONES HEADER */
+
+.manager-register-header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.manager-register-login-button,
+.manager-register-create-button {
+  height: 40px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.manager-register-login-button {
+  background: #ffffff;
+
+  color: var(--manager-primary);
+
+  border: 1px solid var(--manager-primary);
+}
+
+.manager-register-create-button {
+  background: var(--manager-primary);
+
+  color: #ffffff;
+
+  border: 1px solid var(--manager-primary);
+}
+
+
+/* =================================
+   CONTENIDO
+================================= */
+
+.manager-register-content {
+  flex: 1;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  padding: 34px 20px 38px;
+}
+
+
+/* =================================
+   TARJETA
+================================= */
+
+.manager-register-card {
+  width: 820px;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--manager-border);
+
+  border-radius: 4px;
+}
+
+.manager-register-card h1 {
+  margin: 0 0 7px;
+
+  color: var(--manager-text);
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.manager-register-description {
+  margin: 0 0 26px;
+
+  color: var(--manager-muted);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =================================
+   SECCIONES
+================================= */
+
+.manager-register-section-title {
+  margin: 0 0 16px;
+
+  padding-bottom: 9px;
+
+  color: var(--manager-primary);
+
+  border-bottom: 1px solid var(--manager-border);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+
+/* =================================
+   FILAS
+================================= */
+
+.manager-register-row {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 14px;
+}
+
+
+/* =================================
+   CAMPOS
+================================= */
+
+.manager-register-field {
+  margin-bottom: 15px;
+}
+
+.manager-register-field label {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--manager-text);
+
+  font-size: 10px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+}
+
+.manager-register-field input,
+.manager-register-field select {
+  width: 100%;
+  height: 38px;
+
+  padding: 0 11px;
+
+  background: #ffffff;
+
+  color: var(--manager-text);
+
+  border: 1px solid var(--manager-border);
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 12px;
+
+  outline: none;
+}
+
+.manager-register-field input:focus,
+.manager-register-field select:focus {
+  border-color: var(--manager-primary);
+}
+
+.manager-register-field input::placeholder {
+  color: #758789;
+}
+
+.manager-register-field small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: var(--manager-muted);
+
+  font-size: 10px;
+
+  line-height: 1.45;
+}
+
+
+/* =================================
+   ERRORES
+================================= */
+
+.manager-register-input-error {
+  border-color: var(--manager-danger) !important;
+
+  background: #fffafa !important;
+}
+
+.manager-register-field-error {
+  display: block;
+
+  min-height: 12px;
+
+  margin-top: 4px;
+
+  color: var(--manager-danger);
+
+  font-size: 10px;
+}
+
+
+/* RESUMEN */
+
+.manager-register-summary {
+  margin-top: 10px;
+
+  padding: 9px 10px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+}
+
+.manager-register-summary-error {
+  display: block;
+
+  background: #fff2f1;
+
+  color: var(--manager-danger);
+
+  border-left: 4px solid var(--manager-danger);
+}
+
+
+/* CORREO EXISTENTE */
+
+.manager-register-result {
+  margin-bottom: 18px;
+
+  padding: 11px 12px;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+.manager-register-result-error {
+  display: block;
+
+  background: #fff2f1;
+
+  color: #8a2d28;
+
+  border: 1px solid var(--manager-danger);
+
+  border-left: 4px solid var(--manager-danger);
+}
+
+
+/* =================================
+   AVISO PENDIENTE
+================================= */
+
+.manager-register-warning {
+  margin-top: 3px;
+
+  padding: 13px 14px;
+
+  background: var(--manager-warning-soft);
+
+  color: var(--manager-text);
+
+  border: 1px solid #e3b65f;
+
+  border-left: 4px solid #d9a404;
+
+  border-radius: 4px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+/* =================================
+   BOTONES
+================================= */
+
+.manager-register-actions {
+  margin-top: 18px;
+
+  padding-top: 16px;
+
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 10px;
+
+  border-top: 1px solid var(--manager-border);
+}
+
+
+.manager-register-cancel,
+.manager-register-submit {
+  height: 40px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+
+.manager-register-cancel {
+  background: #ffffff;
+
+  color: var(--manager-primary);
+
+  border: 1px solid var(--manager-primary);
+}
+
+
+.manager-register-submit {
+  background: var(--manager-primary);
+
+  color: #ffffff;
+
+  border: 1px solid var(--manager-primary);
+
+  cursor: pointer;
+}
+
+.manager-register-submit:hover {
+  background: var(--manager-primary-dark);
+}
+
+
+/* =================================
+   REGISTRO EXITOSO
+================================= */
+
+.manager-register-success {
+  width: 570px;
+
+  margin-top: 20px;
+
+  padding: 32px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--manager-border);
+
+  border-radius: 4px;
+
+  text-align: center;
+}
+
+
+.manager-register-success-icon {
+  width: 42px;
+  height: 42px;
+
+  margin: 0 auto 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #eef8f2;
+
+  color: var(--manager-success);
+
+  border: 1px solid var(--manager-success);
+
+  border-radius: 4px;
+
+  font-size: 22px;
+  font-weight: 700;
+}
+
+
+.manager-register-success h2 {
+  margin: 0 0 12px;
+
+  color: var(--manager-text);
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+.manager-register-success p {
+  margin: 5px 0;
+
+  color: var(--manager-muted);
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+.manager-register-pending {
+  margin: 20px auto 14px;
+
+  padding: 10px 14px;
+
+  background: var(--manager-warning-soft);
+
+  color: #876000;
+
+  border: 1px solid #e3b65f;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+.manager-register-success-help {
+  margin-top: 10px !important;
+}
+
+
+.manager-register-success-actions {
+  margin-top: 22px;
+
+  display: flex;
+  justify-content: center;
+
+  gap: 10px;
+}
+
+
+.manager-register-success-button,
+.manager-register-success-secondary {
+  height: 38px;
+
+  padding: 0 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+
+.manager-register-success-button {
+  background: var(--manager-primary);
+
+  color: #ffffff;
+
+  border: 1px solid var(--manager-primary);
+}
+
+
+.manager-register-success-secondary {
+  background: #ffffff;
+
+  color: var(--manager-primary);
+
+  border: 1px solid var(--manager-primary);
+
+  cursor: pointer;
+}
+
+
+/* =================================
+   OCULTAR
+================================= */
+
+.manager-register-hidden {
+  display: none;
+}
+
+
+/* =================================
+   FOOTER
+================================= */
+
+.manager-register-footer {
+  width: 100%;
+
+  background: var(--manager-footer);
+
+  color: #ffffff;
+}
+
+
+.manager-register-footer-container {
+  width: 84%;
+  max-width: 1600px;
+
+  min-height: 76px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.manager-register-footer-left {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  font-size: 10px;
+}
+
+
+.manager-register-footer-left strong {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+.manager-register-footer-right {
+  display: flex;
+  align-items: center;
+
+  gap: 28px;
+
+  font-size: 10px;
+}
+
+
+.manager-register-footer-right a {
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 900px) {
+
+  .manager-register-header {
+    height: auto;
+  }
+
+
+  .manager-register-header-container {
+    width: 92%;
+
+    padding: 18px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 18px;
+  }
+
+
+  .manager-register-header-left {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 14px;
+  }
+
+
+  .manager-register-nav {
+    height: auto;
+
+    flex-wrap: wrap;
+  }
+
+
+  .manager-register-nav a {
+    height: auto;
+  }
+
+
+  .manager-register-card,
+  .manager-register-success {
+    width: 100%;
+  }
+
+
+  .manager-register-row {
+    grid-template-columns: 1fr;
+  }
+
+
+  .manager-register-footer-container {
+    width: 92%;
+
+    padding: 20px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+
+  .manager-register-footer-right {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 6px;
+  }
+}

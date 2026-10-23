@@ -1,0 +1,565 @@
+/* ================================
+   GENERAL
+================================ */
+
+.login-page {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #f5f7f8;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #12211f;
+}
+
+.login-page * {
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.login-page-header {
+  width: 100%;
+  height: 72px;
+
+  background: #ffffff;
+
+  border-bottom: 1px solid #d8e0e2;
+}
+
+.login-header-container {
+  width: 100%;
+  max-width: 1600px;
+  height: 100%;
+
+  margin: 0 auto;
+
+  padding: 0 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-header-left {
+  display: flex;
+  align-items: center;
+}
+
+
+/* MARCA */
+
+.login-brand {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-right: 45px;
+
+  color: #17505c;
+
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.login-brand-square {
+  width: 27px;
+  height: 27px;
+
+  background: #17505c;
+
+  border-radius: 4px;
+}
+
+
+/* NAVEGACIÓN */
+
+.login-nav {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+}
+
+.login-nav a {
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+
+  color: #5e7073;
+
+  font-size: 14px;
+
+  text-decoration: none;
+}
+
+.login-nav a:hover {
+  color: #17505c;
+}
+
+
+/* BOTONES HEADER */
+
+.login-header-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.login-header-login,
+.login-header-register {
+  height: 42px;
+
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.login-header-login {
+  background: #ffffff;
+
+  color: #17505c;
+
+  border: 1px solid #17505c;
+}
+
+.login-header-register {
+  background: #17505c;
+
+  color: #ffffff;
+
+  border: 1px solid #17505c;
+}
+
+
+/* ================================
+   CONTENIDO
+================================ */
+
+.login-content {
+  flex: 1;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 65px 20px;
+
+  background: #f5f7f8;
+}
+
+
+/* ================================
+   TARJETA
+================================ */
+
+.login-card {
+  width: 440px;
+
+  padding: 34px 36px 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #d8e0e2;
+
+  border-radius: 4px;
+}
+
+.login-card h1 {
+  margin: 0 0 9px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #12211f;
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.login-description {
+  margin: 0 0 26px;
+
+  color: #5e7073;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+}
+
+
+/* ================================
+   MENSAJES
+================================ */
+
+.login-message {
+  width: 100%;
+
+  margin-bottom: 18px;
+
+  padding: 11px 12px;
+
+  border-radius: 4px;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+.login-message-hidden {
+  display: none;
+}
+
+
+/* ERROR */
+
+.login-message-error {
+  display: block;
+
+  background: #fff2f1;
+
+  color: #b4322b;
+
+  border: 1px solid #b4322b;
+
+  border-left: 4px solid #b4322b;
+}
+
+.login-message-error span {
+  display: inline-block;
+
+  margin-top: 6px;
+}
+
+
+/* ÉXITO */
+
+.login-message-success {
+  display: block;
+
+  background: #eef8f2;
+
+  color: #1e7f4d;
+
+  border: 1px solid #1e7f4d;
+
+  border-left: 4px solid #1e7f4d;
+}
+
+
+/* BLOQUEADO */
+
+.login-message-blocked {
+  display: block;
+
+  background: #fff2f1;
+
+  color: #7a2b27;
+
+  border: 1px solid #b4322b;
+
+  border-left: 4px solid #b4322b;
+}
+
+.login-message-blocked span {
+  display: inline-block;
+
+  margin-top: 7px;
+
+  color: #5e7073;
+}
+
+
+/* ================================
+   CAMPOS
+================================ */
+
+.login-field {
+  margin-bottom: 18px;
+}
+
+.login-field label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #12211f;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.4px;
+}
+
+.login-field input {
+  width: 100%;
+  height: 44px;
+
+  padding: 0 13px;
+
+  background: #ffffff;
+
+  color: #12211f;
+
+  border: 1px solid #d8e0e2;
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 13px;
+
+  outline: none;
+}
+
+.login-field input::placeholder {
+  color: #7c8b8f;
+}
+
+.login-field input:focus {
+  border-color: #17505c;
+}
+
+
+/* INPUT EN ERROR */
+
+.login-input-error {
+  border-color: #b4322b !important;
+
+  background: #fffafa !important;
+}
+
+
+/* INPUT DESHABILITADO */
+
+.login-field input:disabled {
+  background: #f3f6f7;
+
+  color: #849498;
+
+  cursor: not-allowed;
+}
+
+
+/* ================================
+   OPCIONES
+================================ */
+
+.login-options {
+  width: 100%;
+
+  margin-bottom: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 12px;
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: #5e7073;
+}
+
+.login-remember input {
+  margin: 0;
+
+  cursor: pointer;
+}
+
+.login-options a {
+  color: #17505c;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.login-options a:hover {
+  text-decoration: underline;
+}
+
+
+/* LINKS DESHABILITADOS */
+
+.login-link-disabled {
+  opacity: 0.45;
+
+  pointer-events: none;
+
+  cursor: default;
+}
+
+
+/* ================================
+   BOTÓN
+================================ */
+
+.login-main-button {
+  width: 100%;
+  height: 44px;
+
+  background: #17505c;
+
+  color: #ffffff;
+
+  border: none;
+
+  border-radius: 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.login-main-button:hover {
+  background: #0f3a43;
+}
+
+
+/* ESTADO INGRESANDO */
+
+.login-main-button:disabled {
+  background: #f0f3f4;
+
+  color: #607377;
+
+  border: 1px solid #d8e0e2;
+
+  cursor: not-allowed;
+}
+
+
+/* ================================
+   CREAR CUENTA
+================================ */
+
+.login-create-account {
+  margin-top: 18px;
+
+  text-align: center;
+
+  color: #5e7073;
+
+  font-size: 12px;
+}
+
+.login-create-account a {
+  margin-left: 4px;
+
+  color: #17505c;
+
+  font-weight: 600;
+
+  text-decoration: none;
+}
+
+.login-create-account a:hover {
+  text-decoration: underline;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+.login-page-footer {
+  width: 100%;
+
+  background: #102522;
+
+  color: #ffffff;
+}
+
+.login-footer-container {
+  width: 100%;
+  max-width: 1600px;
+
+  min-height: 92px;
+
+  margin: 0 auto;
+
+  padding: 22px 44px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-footer-left {
+  display: flex;
+  flex-direction: column;
+
+  gap: 6px;
+
+  font-size: 12px;
+}
+
+.login-footer-left strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.login-footer-right {
+  display: flex;
+  align-items: center;
+
+  gap: 30px;
+
+  font-size: 12px;
+}
+
+.login-footer-right a {
+  color: #ffffff;
+
+  text-decoration: none;
+}
+
+.login-footer-right a:hover {
+  text-decoration: underline;
+}
+
+/* Texto de error debajo del campo (estado «error de credenciales») */
+.login-field-error {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #b4322b;
+
+  font-size: 12px;
+}
+
+.login-message strong {
+  font-weight: 700;
+}
