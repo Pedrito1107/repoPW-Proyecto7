@@ -59,6 +59,8 @@ function PublicFooter() {
 
 export function PublicLayout({ children }) {
 
+  const location = useLocation()
+
   // Si ya inició sesión, no se le ofrece entrar o registrarse de nuevo
   const { user, homePath } = useAuth()
 
@@ -80,6 +82,14 @@ export function PublicLayout({ children }) {
                 exact
               >
                 Inicio
+              </SmartLink>
+
+              {/* la ficha de un equipo también pertenece al catálogo */}
+              <SmartLink
+                href="/public/catalogo"
+                className={location.pathname.startsWith('/public/equipos') ? 'active' : ''}
+              >
+                Catálogo
               </SmartLink>
 
               <SmartLink href="/public/reglas">
@@ -176,12 +186,16 @@ export function StudentLayout({ children }) {
 
           <div className="site-header-left">
 
-            <Brand href="/student/cuenta" />
+            <Brand href="/student/catalogo" />
 
             <nav className="site-nav">
 
-              <SmartLink href="/student/cuenta">
-                Mi cuenta
+              <SmartLink href="/student/catalogo">
+                Catálogo
+              </SmartLink>
+
+              <SmartLink href="/student/solicitudes">
+                Mis solicitudes
               </SmartLink>
 
             </nav>
@@ -190,6 +204,13 @@ export function StudentLayout({ children }) {
 
 
           <div className="site-header-actions">
+
+            <input
+              className="header-search"
+              type="search"
+              placeholder="⌕ Buscar equipo o código de inventario"
+              aria-label="Buscar equipo"
+            />
 
             {/* «Renzo Mendoza» + avatar con menú (Mi cuenta / Cerrar sesión),
                 igual que en la cabecera del encargado */}

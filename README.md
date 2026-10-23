@@ -1,9 +1,8 @@
 # Tema 7 — Préstamo de equipos de laboratorio
 
-## Avance: etapa 2 · HU-1 y HU-2 — Entrega 1
+## Avance: etapa 3 · HU-1 a HU-3 — Entrega 1
 
-Esta etapa contiene las historias HU-1 (cuenta y acceso) y HU-2 (inventario).
-Después se agregan la HU-3 (catálogo y solicitud, etapa 3), la HU-4
+Esta etapa contiene las historias HU-1 a HU-3. Después se agregan la HU-4
 (aprobación y entrega, etapa 4), la HU-5 (devoluciones, etapa 5), la HU-6
 (reserva anticipada, etapa 6) y la HU-7 (métricas y usuarios, versión final).
 
@@ -39,7 +38,7 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | mdelgado@aloe.ulima.edu.pe | estudiante | Mariana Delgado Ríos |  |
 | bloqueado@aloe.ulima.edu.pe | estudiante | Alejandra Huamán Solís | Cuenta bloqueada con deuda S/ 60.00 |
 | floayza@aloe.ulima.edu.pe | estudiante | Fabiana Loayza Ramos |  |
-| rmendoza@aloe.ulima.edu.pe | estudiante | Renzo Andrés Mendoza Cárdenas |  |
+| rmendoza@aloe.ulima.edu.pe | estudiante | Renzo Andrés Mendoza Cárdenas | Sus solicitudes aparecen en HU-3 |
 | gnunez@aloe.ulima.edu.pe | estudiante | Gabriel Núñez Herrera | Sin ningún préstamo |
 | lparedes@aloe.ulima.edu.pe | estudiante | Lucía Paredes Ynga |  |
 | estudiante@aloe.ulima.edu.pe | estudiante | Ana María Pérez Hernández |  |
@@ -62,10 +61,12 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | /manager/inventario | Inventario (2.1) |
 | /manager/inventario/nuevo · /manager/inventario/:id/editar | Nuevo / editar equipo (2.2) |
 | /manager/inventario/:id | Unidades, condiciones e historial (2.3–2.5) |
+| /public/catalogo · /student/catalogo | Catálogo (3.1) |
+| /student/equipos/:id · /student/solicitar/:id · /student/solicitudes | Detalle, solicitud y mis solicitudes (3.2–3.4) |
 
 **Todos los datos están en `src/data/seed.json`** (ya no hay `demoData.js`).
-Cada historia los lee con su servicio de `src/services/`: `authService` (HU-1)
-e `inventoryService` (HU-2).
+Cada historia los lee con su servicio de `src/services/`: `catalogService` y
+`requestService` (HU-3).
 
 ### Capas del front
 
@@ -87,8 +88,8 @@ público), el servidor tiene **una carpeta por tipo de usuario**:
 
 | Carpeta | Quién entra | Rutas |
 |---|---|---|
-| `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/equipos/:id`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
-| `student/` | Solo rol estudiante (`soloStudent`) | `/student`, `/student/cuenta` |
+| `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/catalogo`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
+| `student/` | Solo rol estudiante (`soloStudent`) | `/student`, `/student/catalogo`, `/student/solicitudes`… |
 | `manager/` | Solo rol encargado (`soloManager`) | `/manager/cuenta`, `/manager/inventario`… |
 
 Cada ruta de las apps React está registrada **una por una** en el `routes.js`

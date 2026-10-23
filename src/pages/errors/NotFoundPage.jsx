@@ -10,9 +10,10 @@ export function NotFoundContent({ message }) {
       <div className="error-icon">?</div>
       <span className="error-code">ERROR 404 · PÁGINA NO ENCONTRADA</span>
       <h1>No encontramos esta página</h1>
-      <p>{message || 'El enlace pudo cambiar o la ficha del equipo ya no está publicada.'}</p>
+      <p>{message || 'El enlace pudo cambiar o la ficha del equipo ya no está publicada en el catálogo.'}</p>
       <div className="error-actions">
         <a href={homePath} className="btn btn-primary">Ir al inicio</a>
+        <a href="/public/catalogo" className="btn btn-secondary">Buscar un equipo</a>
       </div>
     </div>
   )

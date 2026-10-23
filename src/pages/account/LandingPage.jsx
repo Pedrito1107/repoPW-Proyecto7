@@ -1,4 +1,5 @@
 // src/pages/account/LandingPage.jsx  (HU-1 · 1.1 Landing pública)
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './LandingPage.css'
 import { useInventory } from '../../context/InventoryContext.jsx'
@@ -11,11 +12,17 @@ const PASOS = [
 
 function LandingPage() {
   const { equipos, loading } = useInventory()
+  const [busqueda, setBusqueda] = useState('')
 
   // Destacados: equipos publicados con unidades activas (los 4 primeros)
   const destacados = equipos
     .filter((e) => !e.borrador && e.resumen.total - e.resumen.baja > 0)
     .slice(0, 4)
+
+  function buscar(e) {
+    e.preventDefault()
+    window.location.href = '/public/catalogo?q=' + encodeURIComponent(busqueda.trim())
+  }
 
   return (
     <div className="landing-page">
@@ -25,9 +32,19 @@ function LandingPage() {
             <div className="hero-text">
               <h2>Reserva el equipo del laboratorio antes de tu práctica</h2>
               <p>
-                Revisa los equipos del almacén y cuántas unidades hay libres.
-                Recojo en el Almacén H-102.
+                Busca por equipo o categoría, revisa cuántas unidades hay libres
+                y solicita el préstamo con tus fechas. Recojo en el Almacén H-102.
               </p>
+              <form className="search-box" onSubmit={buscar} role="search">
+                <input
+                  type="text"
+                  placeholder="Busca un equipo: «osciloscopio» o «robótica»"
+                  value={busqueda}
+                  onChange={(e) => setBusqueda(e.target.value)}
+                  aria-label="Buscar equipo"
+                />
+                <button type="submit">Buscar</button>
+              </form>
             </div>
             <div className="hero-image">
               <span>fotografía del almacén · 520 × 300</span>
@@ -39,6 +56,7 @@ function LandingPage() {
           <div className="landing-section-content">
             <div className="featured-header">
               <h2>Equipos destacados</h2>
+              <a href="/public/catalogo">Ver todo el catálogo →</a>
             </div>
 
             {loading ? (

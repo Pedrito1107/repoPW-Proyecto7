@@ -72,10 +72,17 @@
         <% if (session && session.role === 'student') { %>
 
           <a
-            href="/student/cuenta"
+            href="/student/catalogo"
             class="error-btn error-btn-primary"
           >
-            Ir a mi cuenta
+            Ir al catálogo
+          </a>
+
+          <a
+            href="/student/solicitudes"
+            class="error-btn error-btn-secondary"
+          >
+            Mis solicitudes
           </a>
 
         <% } else if (session && session.role === 'manager') { %>

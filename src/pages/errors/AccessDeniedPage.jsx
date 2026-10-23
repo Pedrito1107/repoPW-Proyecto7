@@ -20,7 +20,14 @@ export default function AccessDeniedPage() {
           {esEstudiante ? ' indicando tu código de estudiante.' : '.'}
         </p>
         <div className="error-actions">
-          <a href={homePath} className="btn btn-primary">Ir a mi panel</a>
+          {esEstudiante ? (
+            <>
+              <a href="/student/catalogo" className="btn btn-primary">Ir al catálogo</a>
+              <a href="/student/solicitudes" className="btn btn-secondary">Ver mis solicitudes</a>
+            </>
+          ) : (
+            <a href={homePath} className="btn btn-primary">Ir a mi panel</a>
+          )}
         </div>
       </div>
     </RoleLayout>

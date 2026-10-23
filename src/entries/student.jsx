@@ -16,6 +16,12 @@ import { StudentLayout } from '../components/layouts.jsx'
 import MyAccountPage from '../pages/account/MyAccountPage'
 import { NotFoundContent } from '../pages/errors/NotFoundPage'
 
+// HU-3 · Catálogo y solicitud
+import CatalogPage from '../pages/catalog/CatalogPage'
+import EquipmentDetailPage from '../pages/catalog/EquipmentDetailPage'
+import RequestFormPage from '../pages/catalog/RequestFormPage'
+import MyRequestsPage from '../pages/catalog/MyRequestsPage'
+
 
 function Shell() {
   return (
@@ -39,7 +45,7 @@ function App() {
           path="/student"
           element={
             <Navigate
-              to="/student/cuenta"
+              to="/student/catalogo"
               replace
             />
           }
@@ -51,6 +57,12 @@ function App() {
           element={<MyAccountPage />}
         />
 
+
+        {/* HU-3 · Catálogo y solicitud */}
+        <Route path="/student/catalogo" element={<CatalogPage base="/student" />} />
+        <Route path="/student/equipos/:id" element={<EquipmentDetailPage />} />
+        <Route path="/student/solicitar/:id" element={<RequestFormPage />} />
+        <Route path="/student/solicitudes" element={<MyRequestsPage />} />
 
         <Route
           path="*"

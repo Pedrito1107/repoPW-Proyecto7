@@ -17,6 +17,7 @@ import RegisterManagerPage from '../pages/account/RegisterManagerPage'
 import RecoverPasswordPage from '../pages/account/RecoverPasswordPage'
 import RulesPage, { HelpPage } from '../pages/account/RulesPage'
 import PublicEquipmentPage from '../pages/inventory/PublicEquipmentPage'
+import CatalogPage from '../pages/catalog/CatalogPage'
 import { NotFoundContent } from '../pages/errors/NotFoundPage'
 
 function Shell() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/public/reglas" element={<RulesPage />} />
         <Route path="/public/ayuda" element={<HelpPage />} />
         <Route path="/public/equipos/:id" element={<PublicEquipmentPage />} />
+        <Route path="/public/catalogo" element={<CatalogPage base="/public" />} />
         <Route path="*" element={<NotFoundContent />} />
       </Route>
     </Routes>

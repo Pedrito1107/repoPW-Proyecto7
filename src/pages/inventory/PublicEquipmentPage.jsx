@@ -25,11 +25,13 @@ export default function PublicEquipmentPage() {
   if (!equipo) return <div className="page"><Spinner /></div>
 
   const disponibles = equipo.unidades.filter((u) => u.estado === 'disponible').length
+  const solicitarHref = '/student/solicitar/' + equipo.id
 
   return (
     <div className="page">
       <div className="breadcrumb">
-        <a href="/public">Inicio</a> / {equipo.categoria} / {equipo.nombre}
+        <a href="/public/catalogo">Catálogo</a> /{' '}
+        <a href={'/public/catalogo?categoria=' + encodeURIComponent(equipo.categoria)}>{equipo.categoria}</a> / {equipo.nombre}
       </div>
 
       <div className="ficha">
@@ -79,6 +81,20 @@ export default function PublicEquipmentPage() {
             ))}
           </ul>
 
+          {!user && (
+            <>
+              <a href={'/public/login?next=' + encodeURIComponent(solicitarHref)} className="btn btn-primary btn-block">
+                Solicitar préstamo
+              </a>
+              <p className="availability-login">Necesitas iniciar sesión para solicitar.</p>
+            </>
+          )}
+          {user?.rol === 'estudiante' && (
+            <a href={solicitarHref} className={'btn btn-primary btn-block' + (disponibles ? '' : ' disabled')}
+              aria-disabled={!disponibles} onClick={(e) => { if (!disponibles) e.preventDefault() }}>
+              Solicitar préstamo
+            </a>
+          )}
           {user?.rol === 'encargado' && (
             <a href={'/manager/inventario/' + equipo.id} className="btn btn-secondary btn-block">Gestionar en inventario</a>
           )}

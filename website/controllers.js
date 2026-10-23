@@ -1,6 +1,6 @@
 // website/controllers.js
 // Público general: lo que cualquiera puede ver sin iniciar sesión
-// (landing, ficha pública, login y registro) y el manejo de la sesión.
+// (landing, catálogo, ficha pública, login y registro) y el manejo de la sesión.
 import {
   validateStudentRegistration,
   validateManagerRegistration,
