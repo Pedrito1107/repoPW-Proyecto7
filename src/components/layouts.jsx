@@ -11,6 +11,7 @@ import { shortName, dateTime } from '../shared/format.js'
 import UserMenu from './UserMenu.jsx'
 import { listarBandeja, listarPrestamosVigentes } from '../services/loansService.js'
 import { listarReservasAlmacen, listarListaEspera } from '../services/reservationsService.js'
+import { useMetricsOptional } from '../context/MetricsContext.jsx'
 
 // Datos del seed para los contadores del menú del encargado
 const BANDEJA = listarBandeja()
@@ -332,6 +333,18 @@ const SIDEBAR = [
     label: 'Lista de espera',
     count: () =>
       listarListaEspera().reduce((n, g) => n + g.cola.length, 0)
+  },
+
+  {
+    href: '/manager/tablero',
+    label: 'Tablero'
+  },
+
+  {
+    href: '/manager/usuarios',
+    label: 'Usuarios',
+    // HU-7: total de estudiantes del seed (lo calcula MetricsContext)
+    count: (inv, met) => (met ? met.totalEstudiantes ?? '—' : '—')
   }
 
 ]
@@ -342,6 +355,8 @@ export function ManagerLayout({ children }) {
   const { user } = useAuth()
 
   const inventory = useInventoryOptional()
+
+  const metrics = useMetricsOptional()
 
   const navigate = useNavigate()
 
@@ -498,7 +513,7 @@ export function ManagerLayout({ children }) {
                         : 'sidebar-counter'
                     }
                   >
-                    {item.count(inventory)}
+                    {item.count(inventory, metrics)}
                   </span>
 
                 )}

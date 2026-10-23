@@ -65,9 +65,34 @@ export const ESTADOS_USUARIO = {
 export const MAX_INTENTOS_LOGIN = 5
 export const MAX_DESCRIPCION = 400
 
+// ---------- HU-7 · Métricas y usuarios ----------
+
 // Fecha de corte de los datos de la Entrega 1 (el "hoy" de todas las vistas).
 // En la Entrega 2 será la fecha del servidor.
 export const FECHA_CORTE = '2026-09-14'
+
+// Periodo que muestra el tablero al abrirse
+export const PERIODO_INICIAL = { desde: '2026-08-01', hasta: FECHA_CORTE }
+
+export const MOTIVOS_BLOQUEO = [
+  'Penalidad pendiente de pago',
+  'Devoluciones con retraso reiteradas',
+  'Daño de equipo sin regularizar',
+  'Otro'
+]
+
+export const MOTIVOS_DESBLOQUEO = [
+  'Regularizó su deuda',
+  'Reparó o repuso el equipo dañado',
+  'Bloqueo registrado por error',
+  'Otro'
+]
+
+// Agrupación del gráfico «Préstamos por mes y categoría» (7.2)
+export const GRUPOS_CATEGORIA = {
+  'Medición y laboratorio': ['Medición', 'Laboratorio de física', 'Redes'],
+  'Audiovisual y cómputo': ['Audiovisual', 'Cómputo', 'Robótica']
+}
 
 // ---------- HU-6 · Reserva anticipada ----------
 

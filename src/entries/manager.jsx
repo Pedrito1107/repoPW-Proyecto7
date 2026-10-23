@@ -12,6 +12,7 @@ import {
 
 import { InventoryProvider } from '../context/InventoryContext.jsx'
 import { ToastProvider } from '../context/ToastContext.jsx'
+import { MetricsProvider } from '../context/MetricsContext.jsx'
 import { ManagerLayout } from '../components/layouts.jsx'
 
 import MyAccountPage from '../pages/account/MyAccountPage'
@@ -31,14 +32,20 @@ import StudentHistoryPage from '../pages/returns/StudentHistoryPage'
 // HU-6 · Reserva anticipada
 import ManagerReservationsPage from '../pages/reservations/ManagerReservationsPage'
 import WaitlistPage from '../pages/reservations/WaitlistPage'
+// HU-7 · Métricas y usuarios
+import MetricsDashboardPage from '../pages/metrics/MetricsDashboardPage'
+import RankingPage from '../pages/metrics/RankingPage'
+import UsersPage from '../pages/metrics/UsersPage'
 
 
 function Shell() {
   return (
     <InventoryProvider>
-      <ManagerLayout>
-        <Outlet />
-      </ManagerLayout>
+      <MetricsProvider>
+        <ManagerLayout>
+          <Outlet />
+        </ManagerLayout>
+      </MetricsProvider>
     </InventoryProvider>
   )
 }
@@ -102,6 +109,11 @@ function App() {
         {/* HU-6 · Reserva anticipada */}
         <Route path="/manager/reservas" element={<ManagerReservationsPage />} />
         <Route path="/manager/lista-espera" element={<WaitlistPage />} />
+
+        {/* HU-7 · Métricas y usuarios */}
+        <Route path="/manager/tablero" element={<MetricsDashboardPage />} />
+        <Route path="/manager/ranking" element={<RankingPage />} />
+        <Route path="/manager/usuarios" element={<UsersPage />} />
 
         <Route
           path="*"

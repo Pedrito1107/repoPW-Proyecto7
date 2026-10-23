@@ -1,13 +1,17 @@
 // src/pages/returns/StudentHistoryPage.jsx
 // HU-5 · 5.4 Historial del estudiante · 5.5 Aviso de deuda pendiente
-// Los datos del estudiante y su historial de préstamos salen del seed con
-// usersService.getEstudiante. «Registrar pago» es de HU-5 y aún no cambia nada.
+// (También es la ficha de detalle que abre «Ver historial» en Usuarios, HU-7.)
+// Los datos del estudiante, su historial de préstamos y el bloqueo /
+// desbloqueo vienen de HU-7 (MetricsContext). «Registrar pago» es de HU-5
+// y aún no cambia nada.
 
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { StatusBadge, StatCard, EmptyState, Spinner } from '../../components/ui.jsx'
-import { getEstudiante } from '../../services/usersService.js'
-import { money, dateOnly, plural } from '../../shared/format.js'
+import { BlockModal } from '../metrics/BlockModal.jsx'
+import { useMetrics } from '../../context/MetricsContext.jsx'
+import { useToast } from '../../context/ToastContext.jsx'
+import { money, dateOnly, dateTime, plural } from '../../shared/format.js'
 
 function devolucionTexto(h) {
   if (h.estado === 'devuelta') return dateOnly(h.devolucion)
@@ -16,8 +20,11 @@ function devolucionTexto(h) {
 
 export default function StudentHistoryPage() {
   const { id } = useParams()
+  const { getEstudiante, bloquearCuenta, desbloquearCuenta, version } = useMetrics()
+  const toast = useToast()
   const [e, setE] = useState(null)
   const [noExiste, setNoExiste] = useState(false)
+  const [modal, setModal] = useState(null)
 
   useEffect(() => {
     let vigente = true
@@ -26,7 +33,7 @@ export default function StudentHistoryPage() {
       .then((d) => { if (vigente) setE(d) })
       .catch(() => { if (vigente) setNoExiste(true) })
     return () => { vigente = false }
-  }, [id])
+  }, [id, version, getEstudiante])
 
   if (noExiste) {
     return (
@@ -36,7 +43,7 @@ export default function StudentHistoryPage() {
           <EmptyState
             title="No encontramos a este estudiante"
             text="Puede que el enlace sea incorrecto o que la cuenta ya no exista."
-            action={<Link to="/manager/prestamos" className="btn btn-primary">Ir a préstamos vigentes</Link>}
+            action={<Link to="/manager/usuarios" className="btn btn-primary">Ir a usuarios</Link>}
           />
         </div>
       </div>
@@ -45,10 +52,23 @@ export default function StudentHistoryPage() {
 
   if (!e || e.id !== id) return <div className="page"><Spinner /></div>
 
+  const bloqueado = e.estado === 'bloqueado'
+
+  async function onConfirm(datos) {
+    if (modal === 'desbloquear') {
+      const r = await desbloquearCuenta(e.id, datos)
+      toast.success('Cuenta desbloqueada. Su estado ahora es «' + r.estadoLabel + '».')
+    } else {
+      await bloquearCuenta(e.id, datos)
+      toast.success('Cuenta bloqueada. El motivo quedó registrado en su historial.')
+    }
+    setModal(null)
+  }
+
   return (
     <div className="page">
       <div className="breadcrumb">
-        <Link to="/manager/prestamos">Préstamos vigentes</Link> / Historial del estudiante / {e.nombre}
+        <Link to="/manager/usuarios">Usuarios</Link> / Estudiantes / {e.nombre}
       </div>
 
       <div className="page-header">
@@ -60,6 +80,9 @@ export default function StudentHistoryPage() {
         </div>
         <div className="page-header-actions">
           {e.deuda > 0 && <button type="button" className="btn btn-secondary">Registrar pago</button>}
+          {bloqueado
+            ? <button type="button" className="btn btn-primary" onClick={() => setModal('desbloquear')}>Desbloquear cuenta</button>
+            : <button type="button" className="btn btn-danger" onClick={() => setModal('bloquear')}>Bloquear cuenta</button>}
         </div>
       </div>
 
@@ -134,6 +157,39 @@ export default function StudentHistoryPage() {
           </div>
         )}
       </div>
+
+      <section className="card">
+        <h2 className="card-title">Bloqueos de la cuenta</h2>
+        {e.bloqueos.length === 0 ? (
+          <p className="text-muted" style={{ margin: 0 }}>La cuenta no tiene bloqueos registrados.</p>
+        ) : (
+          <ul className="block-log">
+            {e.bloqueos.map((b) => (
+              <li key={b.id}>
+                <span className="mono">{dateTime(b.fecha)}</span>
+                <span>
+                  <span className={'badge ' + (b.accion === 'bloqueo' ? 'badge-danger' : 'badge-success')}>
+                    {b.accion === 'bloqueo' ? 'Bloqueo' : 'Desbloqueo'}
+                  </span>
+                </span>
+                <span>
+                  <strong>{b.motivo}.</strong> {b.detalle}
+                  <span className="cell-sub"> · {b.encargado}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
+
+      {modal && (
+        <BlockModal
+          usuario={e.nombre}
+          desbloquear={modal === 'desbloquear'}
+          onClose={() => setModal(null)}
+          onConfirm={onConfirm}
+        />
+      )}
     </div>
   )
 }

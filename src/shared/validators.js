@@ -112,3 +112,38 @@ export function validateEquipoData(data, borrador, { categorias, maxDescripcion 
 export function hasErrors(errors) {
   return Object.keys(errors).length > 0
 }
+
+// ---------- HU-7 · Métricas y usuarios ----------
+
+const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/
+
+// Rango de fechas del tablero y del ranking (fechas YYYY-MM-DD)
+export function validateRango({ desde, hasta }, fechaCorte) {
+  const errors = {}
+  if (!ISO_DATE.test(desde || '')) errors.desde = 'Indica la fecha de inicio.'
+  if (!ISO_DATE.test(hasta || '')) errors.hasta = 'Indica la fecha de fin.'
+  if (!errors.desde && !errors.hasta && desde > hasta) {
+    errors.hasta = 'La fecha de fin debe ser igual o posterior a la de inicio.'
+  }
+  if (!errors.hasta && hasta > fechaCorte) {
+    errors.hasta = 'No hay datos posteriores al ' + fechaCorte.split('-').reverse().join('/') + '.'
+  }
+  return errors
+}
+
+// Bloqueo o desbloqueo de una cuenta: el motivo es obligatorio y queda
+// registrado en el historial del estudiante.
+export const MIN_DETALLE_BLOQUEO = 10
+export const MAX_DETALLE_BLOQUEO = 300
+
+export function validateBloqueo({ motivo, detalle }, motivos) {
+  const errors = {}
+  if (!motivos.includes(motivo)) errors.motivo = 'Selecciona un motivo.'
+  const texto = String(detalle || '').trim()
+  if (texto.length < MIN_DETALLE_BLOQUEO) {
+    errors.detalle = 'Describe el motivo (mínimo ' + MIN_DETALLE_BLOQUEO + ' caracteres).'
+  } else if (texto.length > MAX_DETALLE_BLOQUEO) {
+    errors.detalle = 'Máximo ' + MAX_DETALLE_BLOQUEO + ' caracteres.'
+  }
+  return errors
+}

@@ -1,9 +1,6 @@
 # Tema 7 — Préstamo de equipos de laboratorio
 
-## Avance: etapa 6 · HU-1 a HU-6 — Entrega 1
-
-Esta etapa contiene las historias HU-1 a HU-6. La HU-7 (métricas y usuarios)
-se agrega en la versión final.
+## Avance: HU-1, HU-2 y HU-7 completas · HU-3 a HU-6 con vistas y navegación — Entrega 1
 
 En esta entrega los datos viven en el front: `src/data/seed.json` se copia a
 `localStorage` la primera vez. Para volver a los datos iniciales, en la consola
@@ -33,7 +30,7 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 |---|---|---|---|
 | vccahuana@aloe.ulima.edu.pe | estudiante | Valeria Ccahuana Pino | Con deuda S/ 15.00 |
 | mchavez@aloe.ulima.edu.pe | estudiante | Mateo Chávez Ríos |  |
-| dcornejo@aloe.ulima.edu.pe | estudiante | Daniela Cornejo Saavedra | Con deuda S/ 20.00, sin préstamos en curso |
+| dcornejo@aloe.ulima.edu.pe | estudiante | Daniela Cornejo Saavedra | Con deuda S/ 20.00, sin préstamos en curso (se puede bloquear en HU-7) |
 | mdelgado@aloe.ulima.edu.pe | estudiante | Mariana Delgado Ríos |  |
 | bloqueado@aloe.ulima.edu.pe | estudiante | Alejandra Huamán Solís | Cuenta bloqueada con deuda S/ 60.00 |
 | floayza@aloe.ulima.edu.pe | estudiante | Fabiana Loayza Ramos |  |
@@ -67,14 +64,25 @@ creadas con "Crear cuenta" se agregan en memoria. Todos los correos terminan en
 | /student/prestamos/:codigo/constancia | Constancia vista por el estudiante (4.5) |
 | /manager/devoluciones/:codigo · /manager/usuarios/:id | Devolución e historial del estudiante (5.1–5.5) |
 | /student/calendario · /student/reservas · /manager/reservas · /manager/lista-espera | Reserva anticipada (6.1–6.4) |
+| /manager/tablero · /manager/ranking · /manager/usuarios | Métricas y usuarios (7.1–7.3) |
+
+**HU-7 (métricas y usuarios)** calcula todo desde el seed con
+`services/metricsService.js` y `services/usersService.js`, a través de
+`context/MetricsContext.jsx`: tablero y ranking acotables por rango de fechas
+(y por categoría en el ranking), exportación a CSV, listado de estudiantes con
+filtros, búsqueda y paginación, y bloqueo / desbloqueo con motivo. En esta
+entrega el bloqueo **no se guarda**: se valida y la interfaz lo muestra (tabla,
+ficha `/manager/usuarios/:id` y mensaje), pero vive en memoria y al recargar
+se vuelve a los datos del seed. Se guardará en la Entrega 2.
+Para probar el bloqueo: Daniela Cornejo (con deuda, sin préstamos en curso) se
+puede bloquear; Camila Quispe muestra el error de préstamo sin devolver.
 
 **HU-6 (reserva anticipada)** ya funciona de punta a punta con `services/reservationsService.js`: calendario por equipo con selección de rango, reserva con validación de solapamiento y lista de espera, «Mis reservas» con filtro y cancelación, asignación FIFO del encargado y conversión de la reserva en solicitud de préstamo (desde 3 días antes del inicio).
 
 **Todos los datos están en `src/data/seed.json`** (ya no hay `demoData.js`).
 Cada historia los lee con su servicio de `src/services/`: `catalogService` y
 `requestService` (HU-3), `loansService` (HU-4), `returnsService` (HU-5),
-`reservationsService` (HU-6) y `usersService` (historial del estudiante, HU-5).
-Las vistas de HU-4 a HU-6 todavía solo muestran
+`reservationsService` (HU-6). Las vistas de HU-4 a HU-6 todavía solo muestran
 los datos: aprobar, entregar, devolver o reservar aún no los modifica.
 
 ### Capas del front
@@ -99,7 +107,7 @@ público), el servidor tiene **una carpeta por tipo de usuario**:
 |---|---|---|
 | `website/` | Público general, sin sesión | `/public`, `/public/login`, `/public/catalogo`… · `POST /login`, `/logout-project`, `POST /api/v1/usuarios`, `/api/v1/sessions` |
 | `student/` | Solo rol estudiante (`soloStudent`) | `/student`, `/student/catalogo`, `/student/solicitudes`… |
-| `manager/` | Solo rol encargado (`soloManager`) | `/manager/inventario`, `/manager/solicitudes`, `/manager/reservas`… |
+| `manager/` | Solo rol encargado (`soloManager`) | `/manager/inventario`, `/manager/tablero`, `/manager/usuarios`… |
 
 Cada ruta de las apps React está registrada **una por una** en el `routes.js`
 de su carpeta (sin comodines), agrupada por historia. Al agregar una página
